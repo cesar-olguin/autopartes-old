@@ -1,14 +1,23 @@
 <ion-menu [content]="content">
   <ion-header>
     <ion-toolbar>
-      <ion-title>Menú</ion-title>
+      <ion-title><ion-icon name="logo-facebook"><!--Titulo Menu--></ion-icon></ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-content>
     <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
+      <button menuClose ion-item icon-left  (click)="nav.setRoot(pages2.homePage)">
+          <ion-icon name="home"></ion-icon>
+        Inicio
+      </button>
+      <button menuClose ion-item icon-left  (click)="nav.setRoot(pages2.favoritesPage)">
+          <ion-icon name="heart"></ion-icon>
+        Favoritos
+      </button>
+      <button menuClose ion-item icon-left  (click)="nav.setRoot(pages2.carPage)">
+          <ion-icon name="cart"></ion-icon>
+        Carrito
       </button>
     </ion-list>
   </ion-content>

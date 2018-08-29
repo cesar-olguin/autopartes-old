@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { CarPage } from '../pages/car/car';
+import { FavoritesPage } from '../pages/favorites/favorites';
 import { ListPage } from '../pages/list/list';
 
 @Component({
@@ -16,6 +17,7 @@ export class MyApp {
   rootPage: any = HomePage;
 
   pages: Array<{title: string, component: any}>;
+  pages2: any;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
@@ -24,8 +26,15 @@ export class MyApp {
     this.pages = [
       { title: 'Inicio', component: HomePage },
       { title: 'Carrito', component: CarPage },
+      { title: 'Favoritos', component: FavoritesPage },
       { title: 'List', component: ListPage }
     ];
+
+    this.pages2 = {
+      homePage: HomePage,
+      carPage: CarPage,
+      favoritesPage: FavoritesPage,
+    }
 
   }
 
