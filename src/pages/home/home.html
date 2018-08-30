@@ -9,15 +9,16 @@
 
 <ion-content padding>
   <h3>AUTOPARTES</h3>
-  
+
   <ion-list>
-      <button ion-item *ngFor="let art of articulos" (click)="itemTapped(event, art)"  [id]="art.idArticulo">
-        <ion-thumbnail item-start>
-          <img [src]="art.Foto">
-        </ion-thumbnail>
-        <h1>${{ art.Precio }}</h1>
-        <p>{{ art.Titulo }}</p>
-    
-      </button>
-    </ion-list>
+    <button ion-item *ngFor="let art of articulos" [navPush]="articuloSelect" [navParams]="datosArticulo" (click)="itemTapped(event, art)"
+      [id]="art.idArticulo">
+      <ion-thumbnail item-start>
+        <img [src]="art.Foto">
+      </ion-thumbnail>
+      <h1>${{ art.Precio }}</h1>
+      <p>{{ art.Titulo }}</p>
+
+    </button>
+  </ion-list>
 </ion-content>

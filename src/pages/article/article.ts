@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController,NavParams } from 'ionic-angular';
 import { UserServiceProvider } from './../../providers/user-service/user-service';
 
 @Component({
@@ -7,16 +7,25 @@ import { UserServiceProvider } from './../../providers/user-service/user-service
   templateUrl: 'article.html'
 })
 export class ArticlePage {
-articuloId: any;
-  constructor(public navCtrl: NavController, public restService: UserServiceProvider) {
 
-  }
+articuloId: any;
+idSelected: any[]=[];
+  
+constructor(public navCtrl: NavController, public restService: UserServiceProvider, navArt: NavParams) {
+  this.idSelected = navArt.get('art');
+  this.restService.getArticuloById(navArt.get('art')).then(data => {
+    this.articuloId = data;
+  });
+}
+
   ionViewDidLoad(){
-    this.restService.getArticuloId()
+    console.log("Articulo Obtenido");
+    console.log(this.idSelected);
+   /* this.restService.getArticuloById()
       .then(data => {
         this.articuloId = data;
         console.log("Datos Artiulo");
         console.log(this.articuloId);
-      });
+      });*/
   }
 }

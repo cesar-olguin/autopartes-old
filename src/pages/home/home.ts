@@ -11,37 +11,30 @@ export class HomePage {
 
   selectedItem: any;
   articulos: any[] = [];
-  
+
   constructor(public navCtrl: NavController, public restService: UserServiceProvider, navParams: NavParams) {
     this.selectedItem = navParams.get('art');
   }
 
-  ionViewDidLoad(){
+  ionViewDidLoad() {
     this.restService.getArticulos()
-    .subscribe(
-      (data) => { // Success
-        this.articulos = data['records'];
+      .subscribe(
+        (data) => { // Success
+          this.articulos = data['records'];
 
-      },
-      (error) =>{
-        console.error(error);
-      }
-    )
-  }
-  
-
-  pushPage(){
-    this.navCtrl.push(HomePage, {
-      
-    });
+        },
+        (error) => {
+          console.error(error);
+        }
+      )
   }
 
-  itemTapped(event, ){
+  itemTapped(event, artId) {
     this.navCtrl.push(ArticlePage, {
-      art: art
+      art: artId.idArticulo
     });
-    alert(JSON.stringify(art.idArticulo));
+    alert(JSON.stringify(artId.idArticulo));
     console.log("Articulo Seleccionado");
-    console.log(art);
+    console.log(artId);
   }
 }
