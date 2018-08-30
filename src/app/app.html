@@ -1,7 +1,7 @@
 <ion-menu [content]="content">
   <ion-header>
     <ion-toolbar>
-      <ion-title><ion-icon name="logo-facebook"><!--Titulo Menu--></ion-icon></ion-title>
+      <ion-title><ion-icon name="logo-facebook"><!--Titulo Menu --></ion-icon></ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -19,6 +19,11 @@
           <ion-icon name="cart"></ion-icon>
         Carrito
       </button>
+      <button menuClose ion-item icon-left  (click)="nav.setRoot(pages2.listPage)">
+          <ion-icon name="cart"></ion-icon>
+        Lista
+      </button>
+
     </ion-list>
   </ion-content>
 

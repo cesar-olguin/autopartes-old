@@ -34,6 +34,7 @@ export class MyApp {
       homePage: HomePage,
       carPage: CarPage,
       favoritesPage: FavoritesPage,
+      listPage: ListPage,
     }
 
   }
