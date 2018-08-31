@@ -3,22 +3,46 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>AutoPartes</ion-title>
+    <ion-title></ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h3>AUTOPARTES</h3>
+
+  <img src="../../assets/imgs/slide1.jpg">
 
   <ion-list>
-    <button ion-item *ngFor="let art of articulos" [navPush]="articuloSelect" [navParams]="datosArticulo" (click)="itemTapped(event, art)"
-      [id]="art.idArticulo">
-      <ion-thumbnail item-start>
-        <img [src]="art.Foto">
-      </ion-thumbnail>
+    <ion-item>
+      <ion-label>Marca</ion-label>
+      <ion-select [(ngModel)]="marca" (ionChange)="modeloTapped();" interface="popover">
+        <ion-option *ngFor="let mar of marca" [value]="mar.idMarca">{{ mar.Marca }}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-item>
+      <ion-label>Modelo</ion-label>
+      <ion-select [(ngModel)]="modelos">
+        <ion-option *ngFor="let mod of modelos" [value]="mod.idMarca">{{ mod.Marca }}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ion-searchbar></ion-searchbar>
+  <ion-list>
+    <ion-item>
+    </ion-item>
+  </ion-list>
+
+  <ion-card *ngFor="let art of articulos" [navPush]="articuloSelect" [navParams]="datosArticulo" (click)="itemTapped(art);">
+    <ion-card-header>
+      <img [src]="art.Foto" width="250px" height="250px">
+    </ion-card-header>
+    <ion-card-content>
       <h1>${{ art.Precio }}</h1>
       <p>{{ art.Titulo }}</p>
+    </ion-card-content>
+  </ion-card>
 
-    </button>
-  </ion-list>
 </ion-content>

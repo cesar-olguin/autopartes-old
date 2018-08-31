@@ -10,11 +10,18 @@ export class ArticlePage {
 
 articuloId: any;
 idSelected: any[]=[];
+comentarios: any;
   
 constructor(public navCtrl: NavController, public restService: UserServiceProvider, navArt: NavParams) {
   this.idSelected = navArt.get('art');
+  console.log("art =>",navArt.get('art'));
+  
   this.restService.getArticuloById(navArt.get('art')).then(data => {
     this.articuloId = data;
+  });
+  this.restService.getComentarios(navArt.get('art')).then(data =>{
+    this.comentarios = data;
+    console.log(data);
   });
 }
 

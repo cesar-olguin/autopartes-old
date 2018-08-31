@@ -1,22 +1,46 @@
 <ion-header>
-        <ion-navbar>
-          <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-          </button>
-          <ion-title>AutoPartes</ion-title>
-        </ion-navbar>
-      </ion-header>
-      
-      <ion-content padding >
-          <ion-content *ngFor ="let artId of articuloId">
-                <img [src]="artId.Foto">
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title></ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+
+
+<ion-content padding>
+  <ion-content *ngFor="let artId of articuloId">
+    <img [src]="artId.Foto">
+
+    <h1>{{ artId.Titulo }}</h1>
+    <h3>$ {{ artId.Precio }}</h3>
+
+    <!--button ion-button clear item-end>View</button-->
+
+    <button ion-button block>Comprar</button>
+    <button ion-button block outline>agregar al carrito </button>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          Icono 1
+        </ion-col>
+        <ion-col>
+          Icono 2
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <h5>DESCRIPCION</h5>
+    <p>{{ artId.Descripcion }}</p>
+    <ion-list>
+      <h5>Comentarios</h5>
+        <ion-item *ngFor="let coment of comentarios">
         
-              <h1>{{ artId.Titulo }}</h1>
-              <h3>{{ artId.Precio }}</h3>
-              <p>{{ artId.Descripcion }}</p>
-              <!--button ion-button clear item-end>View</button-->
-            
-         <button>Comprar</button>
-        </ion-content>
-      </ion-content>
-      
+          <h2>{{coment.Titulo}}</h2>
+          <p>{{coment.Comentario}}</p>
+    
+        </ion-item>
+      </ion-list>
+  </ion-content>
+</ion-content>

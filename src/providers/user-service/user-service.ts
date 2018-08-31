@@ -25,11 +25,34 @@ export class UserServiceProvider {
     return this.http.get(this.baseUrl+'/articulo/');
   }
 
-  
+  getMarcas(){
+    return this.http.get(this.baseUrl+'/marcas/');
+  }
+
+  getModelo(id){
+    return new Promise(resolve => {
+      this.http.get(this.baseUrl+'/modelos/'+id).subscribe(data => {
+        resolve(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
 
   getArticuloById(id) {
     return new Promise(resolve => {
       this.http.get(this.baseUrl+'/articulo/'+id).subscribe(data => {
+        resolve(data),
+        console.log(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+
+  getComentarios(id){
+    return new Promise(resolve => {
+      this.http.get(this.baseUrl+'/articulo/'+id+'/comentario/').subscribe(data => {
         resolve(data),
         console.log(data);
       }, err => {
