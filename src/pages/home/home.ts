@@ -17,13 +17,14 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, public restService: UserServiceProvider, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.selectedItem = navParams.get('art');
-    this.selectModelo = navParams.get('mar');
+    //this.selectModelo = navParams.get('mar');
+    //this.presentLoading();
   }
 
   presentLoading() {
     const loader = this.loadingCtrl.create({
       content: "Cargando...",
-      //duration: 3000
+      duration: 2000
     });
     loader.present();
   }
@@ -59,8 +60,8 @@ export class HomePage {
     console.log(artId);
   }
 
-  modeloTapped(): void {
-    alert("Marca no. " + this.marca);
+  modeloTapped() {
+    alert("Marca no. " + JSON.stringify(this.marca));
     this.restService.getModelo(this.marca).then(data => {
       this.modelos = data;
       console.log(data);
