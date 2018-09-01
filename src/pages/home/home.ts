@@ -60,11 +60,9 @@ export class HomePage {
     console.log(artId);
   }
 
-  modeloTapped() {
-    alert("Marca no. " + JSON.stringify(this.marca));
-    this.restService.getModelo(this.marca).then(data => {
+  modeloTapped(idMarca) {
+    this.restService.getModelo(idMarca).then(data => {
       this.modelos = data;
-      console.log(data);
     });
   }
 
