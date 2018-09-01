@@ -14,14 +14,14 @@
   <ion-list>
     <ion-item>
       <ion-label>Marca del Auto</ion-label>
-      <ion-select ngModel="marca"  interface="action-sheet"> <!--The interface the select should use: action-sheet, popover or alert. Default: alert.-->
-        <ion-option *ngFor="let mar of marca" (ionSelect)="marcaTapped(mar.idMarca);" [value]="mar.idMarca">{{ mar.Marca }}</ion-option>
+      <ion-select ngModel="marcas"  interface="action-sheet"> <!--The interface the select should use: action-sheet, popover or alert. Default: alert.-->
+        <ion-option *ngFor="let mar of marcas" (ionSelect)="marcaTapped(mar.idMarca,mar.Marca);" [value]="mar.idMarca">{{ mar.Marca }}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
         <ion-label>Modelo del Auto</ion-label>
         <ion-select ngModel="modelos" interface="action-sheet">
-          <ion-option *ngFor="let mod of modelos" (ionSelect)="modeloTapped(mod.idMarca);" [value]="mod.idMarca">{{ mod.Marca }}</ion-option>
+          <ion-option *ngFor="let mod of modelos" (ionSelect)="modeloTapped(mod.idMarca,mod.Marca)" [value]="mod.idMarca">{{ mod.Marca }}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item>

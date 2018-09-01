@@ -13,12 +13,18 @@ export class HomePage {
   selectedItem: any;
   articulos: any[] = [];
   modelos: any;
-  marca: any[] = [];
-  selectModelo: any[] = [];
+  marcas: any[] = [];
+  selectModelo: any;
+  selectMarca: any;
+  public marcaId;
+  public modeloId;
+  public marcaName;
+  public modeloName;
 
   constructor(public navCtrl: NavController, public restService: UserServiceProvider, public navParams: NavParams, public loadingCtrl: LoadingController) {
-    this.selectedItem = navParams.get('art');
-    //this.selectModelo = navParams.get('mar');
+    //this.selectedItem = navParams.get('art');
+    //this.selectModelo = navParams.get('mod');
+    //this.selectMarca = navParams.get('mar');
     //this.presentLoading();
   }
 
@@ -44,7 +50,7 @@ export class HomePage {
     this.restService.getMarcas()
       .subscribe(
         (data) => {
-          this.marca = data['records'];
+          this.marcas = data['records'];
         },
         (error) => {
           console.log(error);
@@ -56,23 +62,27 @@ export class HomePage {
     this.navCtrl.push(ArticlePage, {
       art: artId.idArticulo
     });
-    alert(JSON.stringify(artId.idArticulo));
-    console.log("Articulo Seleccionado");
-    console.log(artId);
   }
 
-  marcaTapped(idMarca) {
+  marcaTapped(idMarca,Marca) {
+    this.marcaId = idMarca;
+    this.marcaName = Marca;
     this.restService.getModelo(idMarca).then(data => {
-      this.modelos = data;
+      this.modelos = data
     });
   }
-  
-  modeloTapped(idMarca) {
-   
+
+  modeloTapped(idMarca,Modelo) {
+   this.modeloId = idMarca;
+   this.modeloName = Modelo;
   }
 
-  buscarModeloMarca(){
+  buscarModeloMarca(/*marcaId,modeloId*/) {
     this.navCtrl.push(CarcoincidencePage, {
+      marId: this.marcaId,
+      marName: this.marcaName,
+      modId: this.modeloId,
+      modName: this.modeloName
     });
   }
 

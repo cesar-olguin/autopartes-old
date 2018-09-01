@@ -15,11 +15,25 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class CarcoincidencePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+  selectModelo: any;
+  selectMarca: any;
+  selectMarcaName: any;
+  selectModeloName: any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public navModId: NavParams, public navModName: NavParams ,public navMarId: NavParams, public navMarName: NavParams) {
+    this.selectMarca = navMarId.get('marId');
+    //console.log("Marca ID =>", navMarId.get('marId'));
+    this.selectMarcaName = navMarName.get('marName');
+    //console.log("Marca Nombre =>", navMarName.get('marName'));
+    this.selectModelo = navModId.get('modId');
+    //console.log("Modelo ID =>", navModId.get('modId'));
+    this.selectModeloName = navModName.get('modName');
+    //console.log("Modelo Nombre =>", navModName.get('modName'));
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CarcoincidencePage');
+  
   }
 
 }

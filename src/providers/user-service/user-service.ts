@@ -42,8 +42,7 @@ export class UserServiceProvider {
   getArticuloById(id) {
     return new Promise(resolve => {
       this.http.get(this.baseUrl+'/articulo/'+id).subscribe(data => {
-        resolve(data),
-        console.log(data);
+        resolve(data)
       }, err => {
         console.log(err);
       });
@@ -53,8 +52,7 @@ export class UserServiceProvider {
   getComentarios(id){
     return new Promise(resolve => {
       this.http.get(this.baseUrl+'/articulo/'+id+'/comentario/').subscribe(data => {
-        resolve(data),
-        console.log(data);
+        resolve(data)
       }, err => {
         console.log(err);
       });
