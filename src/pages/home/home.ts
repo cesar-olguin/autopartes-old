@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { UserServiceProvider } from './../../providers/user-service/user-service';
 import { LoadingController } from 'ionic-angular';
+import { CarcoincidencePage } from '../carcoincidence/carcoincidence';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -60,9 +61,18 @@ export class HomePage {
     console.log(artId);
   }
 
-  modeloTapped(idMarca) {
+  marcaTapped(idMarca) {
     this.restService.getModelo(idMarca).then(data => {
       this.modelos = data;
+    });
+  }
+  
+  modeloTapped(idMarca) {
+   
+  }
+
+  buscarModeloMarca(){
+    this.navCtrl.push(CarcoincidencePage, {
     });
   }
 

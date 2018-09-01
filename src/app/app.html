@@ -1,26 +1,34 @@
 <ion-menu [content]="content">
   <ion-header>
     <ion-toolbar color="dark">
-      <ion-title><ion-icon name="logo-facebook"><!--Titulo Menu --></ion-icon></ion-title>
+      <ion-title>
+        <ion-icon name="logo-facebook">
+          <!--Titulo Menu -->
+        </ion-icon>
+      </ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-content>
     <ion-list>
-      <button menuClose ion-item icon-left  (click)="nav.setRoot(pages2.homePage)">
-          <ion-icon name="home"></ion-icon>
+      <button menuClose ion-item icon-left (click)="nav.setRoot(pages2.loginPage)">
+        <ion-icon name="person"></ion-icon>
+        Login
+      </button>
+      <button menuClose ion-item icon-left (click)="nav.setRoot(pages2.homePage)">
+        <ion-icon name="home"></ion-icon>
         Inicio
       </button>
-      <button menuClose ion-item icon-left  (click)="nav.setRoot(pages2.favoritesPage)">
-          <ion-icon name="heart"></ion-icon>
+      <button menuClose ion-item icon-left (click)="nav.setRoot(pages2.favoritesPage)">
+        <ion-icon name="heart"></ion-icon>
         Favoritos
       </button>
-      <button menuClose ion-item icon-left  (click)="nav.setRoot(pages2.carPage)">
-          <ion-icon name="cart"></ion-icon>
+      <button menuClose ion-item icon-left (click)="nav.setRoot(pages2.carPage)">
+        <ion-icon name="cart"></ion-icon>
         Carrito
       </button>
-      <button menuClose ion-item icon-left  (click)="nav.setRoot(pages2.listPage)">
-          <ion-icon name="cart"></ion-icon>
+      <button menuClose ion-item icon-left (click)="nav.setRoot(pages2.listPage)">
+        <ion-icon name="cart"></ion-icon>
         Lista
       </button>
 
