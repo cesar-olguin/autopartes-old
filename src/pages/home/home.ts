@@ -25,12 +25,11 @@ export class HomePage {
     //this.selectedItem = navParams.get('art');
     //this.selectModelo = navParams.get('mod');
     //this.selectMarca = navParams.get('mar');
-    //this.presentLoading();
+    this.presentLoading();
   }
 
   presentLoading() {
     const loader = this.loadingCtrl.create({
-      content: "Cargando...",
       duration: 2000
     });
     loader.present();

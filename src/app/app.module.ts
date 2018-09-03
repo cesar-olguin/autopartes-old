@@ -10,6 +10,7 @@ import { ArticlePage } from '../pages/article/article';
 import { ListPage } from '../pages/list/list';
 import { CarcoincidencePage } from '../pages/carcoincidence/carcoincidence';
 import { LoginPage } from '../pages/login/login';
+import { AddArticlePage } from './../pages/add-article/add-article';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -25,7 +26,8 @@ import { HttpClientModule } from '@angular/common/http';
     ArticlePage,
     ListPage,
     CarcoincidencePage,
-    LoginPage
+    LoginPage,
+    AddArticlePage
   ],
   imports: [
     BrowserModule,
@@ -41,7 +43,8 @@ import { HttpClientModule } from '@angular/common/http';
     ArticlePage,
     ListPage,
     CarcoincidencePage,
-    LoginPage
+    LoginPage,
+    AddArticlePage
   ],
   providers: [
     StatusBar,

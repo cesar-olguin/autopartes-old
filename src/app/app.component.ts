@@ -8,6 +8,7 @@ import { CarPage } from '../pages/car/car';
 import { FavoritesPage } from '../pages/favorites/favorites';
 import { ListPage } from '../pages/list/list';
 import { LoginPage } from "../pages/login/login";
+import { AddArticlePage } from '../pages/add-article/add-article';
 
 @Component({
   templateUrl: 'app.html'
@@ -29,7 +30,8 @@ export class MyApp {
       { title: 'Inicio', component: HomePage },
       { title: 'Carrito', component: CarPage },
       { title: 'Favoritos', component: FavoritesPage },
-      { title: 'List', component: ListPage }
+      { title: 'List', component: ListPage },
+      { title: 'AddArticulo', component: AddArticlePage }
     ];
 
     this.pages2 = {
@@ -38,6 +40,7 @@ export class MyApp {
       carPage: CarPage,
       favoritesPage: FavoritesPage,
       listPage: ListPage,
+      addArticle: AddArticlePage
     }
 
   }
