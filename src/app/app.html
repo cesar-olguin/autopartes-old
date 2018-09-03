@@ -15,9 +15,17 @@
         <ion-icon name="person"></ion-icon>
         Login
       </button>
+      <button menuClose ion-item icon-left (click)="nav.setRoot(pages2.userPage)">
+          <ion-icon name="person"></ion-icon>
+          Info Usuario
+        </button>
       <button menuClose ion-item icon-left (click)="nav.setRoot(pages2.homePage)">
         <ion-icon name="home"></ion-icon>
         Inicio
+      </button>
+      <button menuClose ion-item icon-left (click)="nav.setRoot(pages2.vendorsPage)">
+        <ion-icon name="home"></ion-icon>
+        Vendedores
       </button>
       <button menuClose ion-item icon-left (click)="nav.setRoot(pages2.favoritesPage)">
         <ion-icon name="heart"></ion-icon>

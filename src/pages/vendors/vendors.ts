@@ -1,14 +1,14 @@
-import { ArticlePage } from './../article/article';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { UserServiceProvider } from './../../providers/user-service/user-service';
-import { LoadingController } from 'ionic-angular';
+import { ArticlePage } from './../article/article';
 import { CarcoincidencePage } from '../carcoincidence/carcoincidence';
+
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-vendors',
+  templateUrl: 'vendors.html',
 })
-export class HomePage {
+export class VendorsPage {
 
   selectedItem: any;
   articulos: any[] = [];
@@ -20,21 +20,8 @@ export class HomePage {
   public modeloId;
   public marcaName;
   public modeloName;
-
-  constructor(public navCtrl: NavController, public restService: UserServiceProvider, public navParams: NavParams, public loadingCtrl: LoadingController) {
-    //this.selectedItem = navParams.get('art');
-    //this.selectModelo = navParams.get('mod');
-    //this.selectMarca = navParams.get('mar');
-    //this.presentLoading();
+  constructor(public navCtrl: NavController, public restService: UserServiceProvider, public navParams: NavParams) {
   }
-
-  presentLoading() {
-    const loader = this.loadingCtrl.create({
-      duration: 2000
-    });
-    loader.present();
-  }
-
   ionViewDidLoad() {
     this.restService.getArticulos()
       .subscribe(
