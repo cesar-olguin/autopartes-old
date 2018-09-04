@@ -1,3 +1,4 @@
+import { Camera } from '@ionic-native/camera';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -13,6 +14,7 @@ import { LoginPage } from '../pages/login/login';
 import { AddArticlePage } from './../pages/add-article/add-article';
 import { VendorsPage } from './../pages/vendors/vendors';
 import { UserPage } from './../pages/user/user';
+import { CameraPage } from './../pages/camera/camera';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -31,7 +33,8 @@ import { HttpClientModule } from '@angular/common/http';
     LoginPage,
     AddArticlePage,
     VendorsPage,
-    UserPage
+    UserPage,
+    CameraPage
   ],
   imports: [
     BrowserModule,
@@ -50,13 +53,15 @@ import { HttpClientModule } from '@angular/common/http';
     LoginPage,
     AddArticlePage,
     VendorsPage,
-    UserPage
+    UserPage,
+    CameraPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    UserServiceProvider
+    UserServiceProvider,
+    Camera
   ]
 })
 export class AppModule {}

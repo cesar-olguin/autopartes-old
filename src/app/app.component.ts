@@ -9,8 +9,7 @@ import { FavoritesPage } from '../pages/favorites/favorites';
 import { ListPage } from '../pages/list/list';
 import { LoginPage } from "../pages/login/login";
 import { AddArticlePage } from '../pages/add-article/add-article';
-import { VendorsPage } from '../pages/vendors/vendors';
-import { UserPage } from './../pages/user/user';
+import { VendorsPage } from './../pages/vendors/vendors';
 
 @Component({
   templateUrl: 'app.html'
@@ -33,8 +32,7 @@ export class MyApp {
       { title: 'Carrito', component: CarPage },
       { title: 'Favoritos', component: FavoritesPage },
       { title: 'List', component: ListPage },
-      { title: 'AddArticulo', component: AddArticlePage },
-      { title: 'Vendedores', component: VendorsPage }
+      { title: 'AddArticulo', component: AddArticlePage }
     ];
 
     this.pages2 = {
@@ -44,8 +42,7 @@ export class MyApp {
       favoritesPage: FavoritesPage,
       listPage: ListPage,
       addArticle: AddArticlePage,
-      vendorsPage: VendorsPage,
-      userPage: UserPage
+      vendorsPage: VendorsPage
     }
 
   }
@@ -55,7 +52,7 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
-      this.splashScreen.show();
+      this.splashScreen.hide();
     });
   }
 

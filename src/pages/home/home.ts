@@ -28,13 +28,6 @@ export class HomePage {
     //this.presentLoading();
   }
 
-  presentLoading() {
-    const loader = this.loadingCtrl.create({
-      duration: 2000
-    });
-    loader.present();
-  }
-
   ionViewDidLoad() {
     this.restService.getArticulos()
       .subscribe(

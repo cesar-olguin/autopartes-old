@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { CameraPage } from './../camera/camera';
 
 /**
  * Generated class for the AddArticlePage page.
@@ -19,6 +20,12 @@ export class AddArticlePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddArticlePage');
+  }
+
+  openCamera() {
+    this.navCtrl.push(CameraPage, {
+    
+    });
   }
 
 }
