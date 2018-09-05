@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { CameraPage } from './../camera/camera';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 /**
  * Generated class for the AddArticlePage page.
@@ -15,16 +15,28 @@ import { CameraPage } from './../camera/camera';
 })
 export class AddArticlePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddArticlePage');
   }
 
-  openCamera() {
-    this.navCtrl.push(CameraPage, {
-    
+  image: string = null;
+
+  getPicture(){
+    let options: CameraOptions = {
+      destinationType: this.camera.DestinationType.DATA_URL,
+      targetWidth: 1000,
+      targetHeight: 1000,
+      quality: 100
+    }
+    this.camera.getPicture( options )
+    .then(imageData => {
+      this.image = `data:image/jpeg;base64,${imageData}`;
+    })
+    .catch(error =>{
+      console.error( error );
     });
   }
 

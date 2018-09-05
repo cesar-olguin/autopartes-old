@@ -27,18 +27,6 @@
         <ion-icon name="home"></ion-icon>
         Vendedores
       </button>
-      <button menuClose ion-item icon-left (click)="nav.setRoot(pages2.favoritesPage)">
-        <ion-icon name="heart"></ion-icon>
-        Favoritos
-      </button>
-      <button menuClose ion-item icon-left (click)="nav.setRoot(pages2.carPage)">
-        <ion-icon name="cart"></ion-icon>
-        Carrito
-      </button>
-      <button menuClose ion-item icon-left (click)="nav.setRoot(pages2.listPage)">
-        <ion-icon name="cart"></ion-icon>
-        Lista
-      </button>
       <button menuClose ion-item icon-left (click)="nav.setRoot(pages2.addArticle)">
         <ion-icon name="cart"></ion-icon>
         Agregar Articulo
@@ -48,10 +36,6 @@
   </ion-content>
 
 </ion-menu>
-
-<div *ngIf="showSplash" class="splash">
-  <div class="spinner"></div>
-</div>
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

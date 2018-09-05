@@ -1,3 +1,4 @@
+import { UserPage } from './../pages/user/user';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -42,6 +43,7 @@ export class MyApp {
       favoritesPage: FavoritesPage,
       listPage: ListPage,
       addArticle: AddArticlePage,
+      userPage: UserPage,
       vendorsPage: VendorsPage
     }
 

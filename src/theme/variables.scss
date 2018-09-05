@@ -41,6 +41,10 @@ $colors: (
   dark:       #222
 );
 
+ion-content {
+  background: linear-gradient(to right bottom, #002244, #004a74, #007582, #009d67, #69be28);
+}
+
 
 // App iOS Variables
 // --------------------------------------------------

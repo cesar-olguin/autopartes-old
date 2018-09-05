@@ -32,7 +32,10 @@
     Adjuntar Foto
 </ion-item-divider>
 <ion-item>
-    <button ion-button block (click)='openCamera();'>Tomar Foto.</button>
+  <button ion-button block (click)="getPicture()">Toma una foto</button>
+  </ion-item>
+  <ion-item>
+    <img [src]="image" *ngIf="image" width="100" height="100"/>
   </ion-item>
 <ion-item>
   <button ion-button block>Agregar Articulo</button>
