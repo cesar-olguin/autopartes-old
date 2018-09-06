@@ -8,38 +8,39 @@
 </ion-header>
 
 <ion-content padding>
-
-  <ion-item>
-    <ion-label color="primary" stacked>Titulo</ion-label>
-    <ion-input type="text"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label color="primary" stacked>Descripcion</ion-label>
-    <ion-input type="text"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label color="primary" stacked>Precio</ion-label>
-    <ion-input type="text"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label color="primary" stacked>Ubicacion</ion-label>
-    <ion-input type="text"></ion-input>
-  </ion-item>
-  <ion-item-divider>
-    Adjuntar Foto
-</ion-item-divider>
-<ion-item>
-  <button ion-button block (click)="getPicture()">Toma una foto</button>
-  </ion-item>
-  <ion-item>
-    <img [src]="image" *ngIf="image" width="100" height="100"/>
-  </ion-item>
-<ion-item>
-  <button ion-button block>Agregar Articulo</button>
-</ion-item>
-
+ <form [formGroup]="myForm">
+   <ion-list>
+      <ion-item>
+          <ion-label color="primary" autocomplete="on" autocorrect="on" stacked>Titulo</ion-label>
+          <ion-input formControlName="titulo" type="text"></ion-input>
+        </ion-item>
+    
+        <ion-item>
+          <ion-label color="primary" autocomplete="on" autocorrect="on" stacked>Descripcion</ion-label>
+          <ion-textarea formControlName="descripcion"></ion-textarea>
+        </ion-item>
+    
+        <ion-item>
+          <ion-label color="primary" stacked>Precio</ion-label>
+          <ion-input type="number" formControlName="precio"></ion-input>
+        </ion-item>
+    
+        <!--ion-item>
+          <ion-label color="primary" stacked>Ubicacion</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item-->
+        <ion-item-divider>
+          Adjuntar Foto
+        </ion-item-divider>
+        <ion-item>
+          <button ion-button block (click)="getPicture()">Toma una foto</button>
+        </ion-item>
+        <ion-item>
+          <img formControlName="imagen" [src]="image" *ngIf="image"/>
+        </ion-item>
+        <ion-item>
+          <button ion-button block (click)="addArticle()" >Agregar Articulo</button>
+        </ion-item>
+   </ion-list>
+ </form>
 </ion-content>
-  

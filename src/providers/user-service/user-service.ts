@@ -59,4 +59,16 @@ export class UserServiceProvider {
     });
   }
 
+  postArticulo(data){
+    return new Promise((resolve, reject) => {
+      this.http.post(this.baseUrl + '/articulo/', JSON.stringify(data))
+      .subscribe(res => {
+        resolve(res);
+      }, err => {
+        console.log(err);
+      });
+    });  
+  }
+
+
 }
