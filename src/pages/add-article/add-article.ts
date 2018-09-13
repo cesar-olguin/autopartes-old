@@ -20,13 +20,16 @@ export class AddArticlePage {
 
   image: string = null;
   myForm: FormGroup;
+  date: string;
+  myFoto: FormGroup;
+  public foto;
   
   constructor(public navCtrl: NavController, public restService: UserServiceProvider, public navParams: NavParams, private camera: Camera, public formBuilder: FormBuilder) {
     this.myForm = this.createMyForm();
+    this.myFoto = this.takeFoto();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AddArticlePage');
   }
 
   getPicture() {
@@ -39,28 +42,48 @@ export class AddArticlePage {
     this.camera.getPicture(options)
       .then(imageData => {
         this.image = `data:image/jpeg;base64,${imageData}`;
+        this.foto = this.image;
       })
       .catch(error => {
         console.error(error);
       });
   }
 
-  private createMyForm() {
+  public createMyForm() {
     return this.formBuilder.group({
-      titulo: ['', Validators.required],
-      descripcion: ['', Validators.required],
-      precio: ['', Validators.required],
+      Titulo: ['', Validators.required],
+      Descripcion: ['', Validators.required],
+      Precio: ['', Validators.required],
+      idUsuario: ['1'],
+      Cantidad: ['1'],
+      Ubicacion: ['Manzanillo,Colima,Mexico'],
+      Fecha_alta:[this.date = new Date().toLocaleDateString()],
+      Fecha_modificacion:[''],
+    });
+  }
+
+  public takeFoto(){
+    return this.formBuilder.group({
+      idArticulo: ['6'],
+      Foto: [this.foto, Validators.required],
     });
   }
 
   addArticle() {
+    //this.myForm = this.createMyForm();
+    //this.myFoto = this.takeFoto();
     console.log(this.myForm.value);
-    alert("Datos-> "+JSON.stringify(this.myForm.value));
-    alert(this.restService.postArticulo(JSON.stringify(this.myForm.value)).then((result) => {
+    console.log(this.myFoto.value);
+    this.restService.postArticulo(this.myForm.value).then((result) => {
       console.log(result);
     }, (err) => {
       console.log(err);
-    }));
+    });
+    /*this.restService.postFoto(this.myFoto.value).then((result) => {
+      console.log(result);
+    }, (err) => {
+      console.log(err);
+    });*/
   }
 
 }
