@@ -51,6 +51,7 @@ export class AddArticlePage {
 
   public createMyForm() {
     return this.formBuilder.group({
+      idArticulo:[],
       Titulo: ['', Validators.required],
       Descripcion: ['', Validators.required],
       Precio: ['', Validators.required],
@@ -64,26 +65,26 @@ export class AddArticlePage {
 
   public takeFoto(){
     return this.formBuilder.group({
-      idArticulo: ['6'],
+      idArticulo: ['7'],
       Foto: [this.foto, Validators.required],
     });
   }
 
   addArticle() {
-    //this.myForm = this.createMyForm();
-    //this.myFoto = this.takeFoto();
-    console.log(this.myForm.value);
-    console.log(this.myFoto.value);
+    this.myFoto = this.takeFoto();
+    alert(JSON.stringify(this.myForm.value));
+    //alert(JSON.stringify(this.myFoto.value));
+    alert(this.foto);
     this.restService.postArticulo(this.myForm.value).then((result) => {
       console.log(result);
     }, (err) => {
       console.log(err);
     });
-    /*this.restService.postFoto(this.myFoto.value).then((result) => {
+    this.restService.postFoto(this.myFoto.value).then((result) => {
       console.log(result);
     }, (err) => {
       console.log(err);
-    });*/
+    });
   }
 
 }
