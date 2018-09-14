@@ -12,7 +12,7 @@
 
 <ion-content padding>
   <ion-content *ngFor="let artId of articuloId">
-    <img [src]="artId.Foto">
+    <img src="{{artId.Foto_Principal}}">
 
     <h1>{{ artId.Titulo }}</h1>
     <h3>$ {{ artId.Precio }}</h3>

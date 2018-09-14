@@ -64,6 +64,7 @@ export class UserServiceProvider {
       this.http.post(this.baseUrl + '/articulo/', data)
       .subscribe(res => {
         resolve(res);
+        console.log(data);
       }, err => {
         console.log(err);
       });

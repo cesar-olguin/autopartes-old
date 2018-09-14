@@ -16,6 +16,7 @@ constructor(public navCtrl: NavController, public restService: UserServiceProvid
   this.idSelected = navArt.get('art');
   this.restService.getArticuloById(navArt.get('art')).then(data => {
     this.articuloId = data;
+    console.log(data);
   });
   this.restService.getComentarios(navArt.get('art')).then(data =>{
     this.comentarios = data;

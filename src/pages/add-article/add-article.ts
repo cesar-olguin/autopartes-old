@@ -26,7 +26,6 @@ export class AddArticlePage {
   
   constructor(public navCtrl: NavController, public restService: UserServiceProvider, public navParams: NavParams, private camera: Camera, public formBuilder: FormBuilder) {
     this.myForm = this.createMyForm();
-    this.myFoto = this.takeFoto();
   }
 
   ionViewDidLoad() {
@@ -43,6 +42,7 @@ export class AddArticlePage {
       .then(imageData => {
         this.image = `data:image/jpeg;base64,${imageData}`;
         this.foto = this.image;
+        this.myForm = this.createMyForm();
       })
       .catch(error => {
         console.error(error);
@@ -50,37 +50,26 @@ export class AddArticlePage {
   }
 
   public createMyForm() {
+    if(this.foto == null){
+      this.foto = '../../assets/imgs/sin-foto.png'
+    }
     return this.formBuilder.group({
-      idArticulo:[],
       Titulo: ['', Validators.required],
       Descripcion: ['', Validators.required],
       Precio: ['', Validators.required],
       idUsuario: ['1'],
       Cantidad: ['1'],
       Ubicacion: ['Manzanillo,Colima,Mexico'],
-      Fecha_alta:[this.date = new Date().toLocaleDateString()],
+      Fecha_alta:[this.date = new Date().toLocaleDateString('en-GB')],
       Fecha_modificacion:[''],
-    });
-  }
-
-  public takeFoto(){
-    return this.formBuilder.group({
-      idArticulo: ['7'],
-      Foto: [this.foto, Validators.required],
+      Foto_Principal:[this.foto, Validators.required]
     });
   }
 
   addArticle() {
-    this.myFoto = this.takeFoto();
-    alert(JSON.stringify(this.myForm.value));
-    //alert(JSON.stringify(this.myFoto.value));
-    alert(this.foto);
+    console.log(JSON.stringify(this.myForm.value));
+    console.log(this.foto);
     this.restService.postArticulo(this.myForm.value).then((result) => {
-      console.log(result);
-    }, (err) => {
-      console.log(err);
-    });
-    this.restService.postFoto(this.myFoto.value).then((result) => {
       console.log(result);
     }, (err) => {
       console.log(err);
