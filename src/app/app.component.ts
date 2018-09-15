@@ -11,6 +11,7 @@ import { ListPage } from '../pages/list/list';
 import { LoginPage } from "../pages/login/login";
 import { AddArticlePage } from '../pages/add-article/add-article';
 import { VendorsPage } from './../pages/vendors/vendors';
+import { SingUpPage } from './../pages/sing-up/sing-up';
 
 @Component({
   templateUrl: 'app.html'
@@ -44,7 +45,8 @@ export class MyApp {
       listPage: ListPage,
       addArticle: AddArticlePage,
       userPage: UserPage,
-      vendorsPage: VendorsPage
+      vendorsPage: VendorsPage,
+      singUpPage: SingUpPage
     }
 
   }

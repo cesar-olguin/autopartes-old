@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+    <ion-item>
+      <h1>Abre una cuenta.</h1>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" autocomplete="on" autocorrect="on" floating>Nombre</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" autocomplete="on" autocorrect="on" floating>Apellido</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" autocomplete="on" autocorrect="on" floating>Correo</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" autocomplete="on" autocorrect="on" floating>Número de Celular</ion-label>
+      <ion-input type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" autocomplete="on" autocorrect="on" floating>Contraseña</ion-label>
+      <ion-input type="password"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" floating>Fecha de nacimiento</ion-label>
+      <ion-select>
+        <!-- [(ngModel)]="gaming"-->
+        <ion-option value="nes">NES</ion-option>
+        <ion-option value="n64">Nintendo64</ion-option>
+        <ion-option value="ps">PlayStation</ion-option>
+        <ion-option value="genesis">Sega Genesis</ion-option>
+        <ion-option value="saturn">Sega Saturn</ion-option>
+        <ion-option value="snes">SNES</ion-option>
+      </ion-select>
+    </ion-item>
+
+  </ion-list>
+  <ion-list radio-group>
+      <ion-list-header>
+        Genero
+      </ion-list-header>
+
+      <ion-item>
+        <ion-label>Hombre</ion-label>
+        <ion-radio value="h"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Mujer</ion-label>
+        <ion-radio value="m"></ion-radio>
+      </ion-item>
+
+
+    </ion-list>
+
+
+
+      <button ion-button block>Registrarse</button>
+
+</ion-content>

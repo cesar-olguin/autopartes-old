@@ -15,6 +15,7 @@ import { AddArticlePage } from './../pages/add-article/add-article';
 import { VendorsPage } from './../pages/vendors/vendors';
 import { UserPage } from './../pages/user/user';
 import { CameraPage } from './../pages/camera/camera';
+import { SingUpPage } from '../pages/sing-up/sing-up';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -34,7 +35,8 @@ import { HttpClientModule } from '@angular/common/http';
     AddArticlePage,
     VendorsPage,
     UserPage,
-    CameraPage
+    CameraPage,
+    SingUpPage
   ],
   imports: [
     BrowserModule,
@@ -54,7 +56,8 @@ import { HttpClientModule } from '@angular/common/http';
     AddArticlePage,
     VendorsPage,
     UserPage,
-    CameraPage
+    CameraPage,
+    SingUpPage
   ],
   providers: [
     StatusBar,
