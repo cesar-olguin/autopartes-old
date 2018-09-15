@@ -1,3 +1,4 @@
+import { AddArticlePage } from './../add-article/add-article';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { UserServiceProvider } from './../../providers/user-service/user-service';
@@ -69,6 +70,12 @@ export class VendorsPage {
       marName: this.marcaName,
       modId: this.modeloId,
       modName: this.modeloName
+    });
+  }
+
+  addArticle(/*marcaId,modeloId*/) {
+    this.navCtrl.push(AddArticlePage, {
+      
     });
   }
 

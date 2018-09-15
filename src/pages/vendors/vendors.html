@@ -1,12 +1,19 @@
 <ion-header>
   <ion-navbar color="dark">
-    <button ion-button menuToggle>
+    <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>
     </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addArticle();">
+        <!--button ion-button icon-only (click)="openModal()"></button-->
+        <ion-icon name="add-circle"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
+
 
 <ion-content padding>
 
@@ -15,19 +22,22 @@
   <ion-list>
     <ion-item>
       <ion-label>Marca del Auto</ion-label>
-      <ion-select ngModel="marcas"  interface="action-sheet"> <!--The interface the select should use: action-sheet, popover or alert. Default: alert.-->
-        <ion-option *ngFor="let mar of marcas" (ionSelect)="marcaTapped(mar.idMarca,mar.Marca);" [value]="mar.idMarca">{{ mar.Marca }}</ion-option>
+      <ion-select ngModel="marcas" interface="action-sheet">
+        <!--The interface the select should use: action-sheet, popover or alert. Default: alert.-->
+        <ion-option *ngFor="let mar of marcas" (ionSelect)="marcaTapped(mar.idMarca,mar.Marca);" [value]="mar.idMarca">{{
+          mar.Marca }}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
-        <ion-label>Modelo del Auto</ion-label>
-        <ion-select ngModel="modelos" interface="action-sheet">
-          <ion-option *ngFor="let mod of modelos" (ionSelect)="modeloTapped(mod.idMarca,mod.Marca)" [value]="mod.idMarca">{{ mod.Marca }}</ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <button ion-button block (click)="buscarModeloMarca()">Buscar Auto.</button>
-      </ion-item>
+      <ion-label>Modelo del Auto</ion-label>
+      <ion-select ngModel="modelos" interface="action-sheet">
+        <ion-option *ngFor="let mod of modelos" (ionSelect)="modeloTapped(mod.idMarca,mod.Marca)" [value]="mod.idMarca">{{
+          mod.Marca }}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <button ion-button block (click)="buscarModeloMarca()">Buscar Auto.</button>
+    </ion-item>
   </ion-list>
 
 
@@ -36,7 +46,7 @@
 
   <ion-card *ngFor="let art of articulos" (click)="itemTapped(art);">
     <ion-card-header>
-      <img [src]="art.Foto_Principal"/>
+      <img [src]="art.Foto_Principal" />
     </ion-card-header>
     <ion-card-content>
       <h1>${{ art.Precio }}</h1>
