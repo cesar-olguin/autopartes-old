@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+    </ion-title>
+    <ion-buttons end>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-grid>
+    <ion-row align-items-center>
+      <ion-col col-xs-12>
+        <h1>¡Bienvenido!</h1>
+        <p>
+          Si aun no cuentas con una cuenta pulsa el siguiente botón.
+        </p>
+      </ion-col>
+    </ion-row>
+    <ion-row align-items-center>
+      <ion-col>
+        <button ion-button round (click)="newAccount()">¡Registrarte!</button>
+      </ion-col>
+    </ion-row>
+    <ion-row align-items-center>
+      <ion-col>
+        <button ion-button round (click)="loggin()">¡Ya tengo Cuenta!</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

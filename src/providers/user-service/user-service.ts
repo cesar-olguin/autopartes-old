@@ -81,4 +81,16 @@ export class UserServiceProvider {
       });
     });  
   }
+
+  postRegistro(data){
+    return new Promise((resolve, reject) =>{
+      this.http.post(this.baseUrl + '/registro/', data)
+      .subscribe(res => {
+        resolve(res);
+        console.log(data);
+      }, err => {
+        console.log(err);
+      });
+    });  
+  }
 }

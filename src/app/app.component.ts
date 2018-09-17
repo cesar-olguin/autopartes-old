@@ -1,4 +1,3 @@
-import { UserPage } from './../pages/user/user';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -12,6 +11,8 @@ import { LoginPage } from "../pages/login/login";
 import { AddArticlePage } from '../pages/add-article/add-article';
 import { VendorsPage } from './../pages/vendors/vendors';
 import { SingUpPage } from './../pages/sing-up/sing-up';
+import { UserPage } from './../pages/user/user';
+import { AccountPage } from './../pages/account/account';
 
 @Component({
   templateUrl: 'app.html'
@@ -46,7 +47,8 @@ export class MyApp {
       addArticle: AddArticlePage,
       userPage: UserPage,
       vendorsPage: VendorsPage,
-      singUpPage: SingUpPage
+      singUpPage: SingUpPage,
+      accountPage: AccountPage,
     }
 
   }
