@@ -8,47 +8,47 @@
 </ion-header>
 
 <ion-content padding>
-  <form [formGroup]="myForm">
+ 
       <ion-list>
           <ion-item>
             <h1>Abre una cuenta.</h1>
           </ion-item>
           <ion-item>
             <ion-label color="primary" autocomplete="on" autocorrect="on" floating>Nombre (s)</ion-label>
-            <ion-input formControlName="Nombre" type="text"></ion-input>
+            <ion-input [(ngModel)]="Nombre" type="text"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label color="primary" autocomplete="on" autocorrect="on" floating>Apellido Paterno</ion-label>
-            <ion-input formControlName="ApellidoP" type="text"></ion-input>
+            <ion-input [(ngModel)]="ApellidoP" type="text"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label color="primary" autocomplete="on" autocorrect="on" floating>Apellido Materno</ion-label>
-            <ion-input formControlName="ApellidoM" type="text"></ion-input>
+            <ion-input [(ngModel)]="ApellidoM" type="text"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label color="primary" autocomplete="on" autocorrect="on" floating>Correo</ion-label>
-            <ion-input formControlName="Correo" type="email"></ion-input>
+            <ion-input [(ngModel)]="Correo" type="email"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label color="primary" autocomplete="on" autocorrect="on" floating>Número de Celular</ion-label>
-            <ion-input formControlName="Cell" type="tel"></ion-input>
+            <ion-input [(ngModel)]="Cell" type="tel"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label color="primary" autocomplete="on" autocorrect="on" floating>Contraseña</ion-label>
-            <ion-input formControlName="Contrasena" type="password"></ion-input>
+            <ion-input [(ngModel)]="Contrasena" type="password"></ion-input>
           </ion-item>
           <ion-item>
               <ion-label color="primary" autocomplete="on" autocorrect="on" floating>Confirmar Contraseña</ion-label>
-              <ion-input formControlName="Confirmar" type="password"></ion-input>
+              <ion-input [(ngModel)]="Confirmar" type="password"></ion-input>
             </ion-item>
           <ion-item>
             <ion-label color="primary" floating>Fecha de nacimiento</ion-label>
-            <ion-datetime formControlName="Fecha_nac" displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY" cancelText="Cancelar"
+            <ion-datetime [(ngModel)]="Fecha_nac" displayFormat="DD MMM YYYY" pickerFormat="DD/MM/YYYY" cancelText="Cancelar"
               doneText="Ok"></ion-datetime>
           </ion-item>
     
         </ion-list>
-        <ion-list radio-group>
+        <ion-list [(ngModel)]="Genero" radio-group>
           <ion-list-header>
             Genero
           </ion-list-header>
@@ -62,9 +62,9 @@
             <ion-radio value="M"></ion-radio>
           </ion-item>
         </ion-list>
-  </form>
 
 
-  <button menuClose ion-button block (click)="pushPage()">Registrarse</button>
+
+  <button menuClose ion-button block (click)="addUser()">Registrarse</button>
 
 </ion-content>
