@@ -93,4 +93,14 @@ export class UserServiceProvider {
       });
     });  
   }
+
+  getLoggin(email,password){
+    return new Promise(resolve => {
+      this.http.get(this.baseUrl+'/registro/'+email+'/'+password).subscribe(data => {
+        resolve(data)
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
 }
