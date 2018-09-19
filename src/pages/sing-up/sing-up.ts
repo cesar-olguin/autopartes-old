@@ -4,6 +4,7 @@ import { UserServiceProvider } from './../../providers/user-service/user-service
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, ViewController, App } from 'ionic-angular';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the SingUpPage page.
@@ -92,8 +93,7 @@ export class SingUpPage {
                     console.log(err);
                 });
             this.userAdded();
-            this.navCtrl.pop();
-            this.navCtrl.push(HomePage);
+            this.navCtrl.push(LoginPage);
         }
 
     }

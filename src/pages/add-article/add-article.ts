@@ -1,5 +1,6 @@
+import { ArticlePage } from './../article/article';
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, App } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 //import { Http, Headers, RequestOptions } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -24,7 +25,7 @@ export class AddArticlePage {
   myFoto: FormGroup;
   public foto;
   
-  constructor(public navCtrl: NavController, public restService: UserServiceProvider, public navParams: NavParams, private camera: Camera, public formBuilder: FormBuilder) {
+  constructor(public navCtrl: NavController, public restService: UserServiceProvider, public navParams: NavParams, private camera: Camera, public formBuilder: FormBuilder, private appCtrl: App) {
     this.myForm = this.createMyForm();
   }
 
@@ -74,6 +75,7 @@ export class AddArticlePage {
     }, (err) => {
       console.log(err);
     });
+    this.appCtrl.getRootNav().setRoot(ArticlePage);
   }
 
 }

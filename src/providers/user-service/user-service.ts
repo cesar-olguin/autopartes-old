@@ -14,7 +14,6 @@ export class UserServiceProvider {
   baseUrl="http://solucionesgp.com/autopartes";
 
   constructor(private http: HttpClient) {
-    console.log('Hello UserServiceProvider Provider');
   }
 
   

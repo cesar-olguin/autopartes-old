@@ -1,7 +1,8 @@
+import { HomePage } from './../home/home';
 import { empty } from 'rxjs/Observer';
 import { UserServiceProvider } from './../../providers/user-service/user-service';
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, App } from 'ionic-angular';
 import { Md5 } from 'ts-md5/dist/md5';
 /**
  * Generated class for the LoginPage page.
@@ -20,14 +21,14 @@ export class LoginPage {
   public Correo;
   public Password;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public restService: UserServiceProvider, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public restService: UserServiceProvider, public alertCtrl: AlertController, private appCtrl: App) {
   }
 
   ionViewDidLoad() {
 
   }
 
-  loggin() {
+  login() {
     if (this.Correo == empty || this.Password == empty) {
       this.sinDatos();
     }
@@ -39,6 +40,7 @@ export class LoginPage {
         }
         else{
           this.trueLoggin();
+          this.appCtrl.getRootNav().setRoot(HomePage);
         }
       });
     }
