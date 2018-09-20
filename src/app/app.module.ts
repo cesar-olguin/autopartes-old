@@ -24,6 +24,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthProvider } from '../providers/auth/auth';
+import { AuthServiceProvider } from '../providers/auth-service/auth-service';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,7 @@ import { AuthProvider } from '../providers/auth/auth';
       dayNames: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
       dayShortNames: ['dom', 'lun', 'mar', 'mie', 'jue', 'vie', 'sab'],
     }),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -78,7 +81,8 @@ import { AuthProvider } from '../providers/auth/auth';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserServiceProvider,
     Camera,
-    AuthProvider
+    AuthProvider,
+    AuthServiceProvider
   ]
 })
 export class AppModule {}
