@@ -95,7 +95,6 @@ export class SingUpPage {
             this.userAdded();
             this.navCtrl.push(LoginPage);
         }
-
     }
 
     noCoinciden() {

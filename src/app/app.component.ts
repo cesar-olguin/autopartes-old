@@ -1,5 +1,3 @@
-import { AskPage } from './../pages/ask/ask';
-import { ArticlePage } from './../pages/article/article';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -15,6 +13,7 @@ import { VendorsPage } from './../pages/vendors/vendors';
 import { SingUpPage } from './../pages/sing-up/sing-up';
 import { UserPage } from './../pages/user/user';
 import { AccountPage } from './../pages/account/account';
+import { ArticlePage } from './../pages/article/article';
 
 @Component({
   templateUrl: 'app.html'
@@ -32,12 +31,12 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Usuario', component: AccountPage, icon: 'person' },
+      { title: 'Cuenta', component: AccountPage, icon: 'paper' },
       { title: 'Home', component: HomePage, icon: 'home' },
-      { title: 'Carrito', component: CarPage, icon: 'home' },
-      { title: 'Favoritos', component: FavoritesPage, icon: 'home' },
-      { title: 'Articulos en Venta', component: VendorsPage, icon: 'home' },
-      { title: 'Pregunta por un Articulo', component: AskPage, icon: 'home' }
+      { title: 'Carrito', component: CarPage, icon: 'cart' },
+      { title: 'Favoritos', component: FavoritesPage, icon: 'star' },
+      { title: 'Articulos en Venta', component: VendorsPage, icon: 'cart' },
+      { title: 'Usuario', component: UserPage, icon: 'person' },
     ];
 
   

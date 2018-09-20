@@ -1,6 +1,7 @@
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { UserServiceProvider } from '../../providers/user-service/user-service';
 
 @IonicPage()
 @Component({
@@ -15,13 +16,15 @@ export class AskPage {
   Descripcion: string;
   Fecha_alta: string;
   Foto_Principal: string;
+  foto;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private camera: Camera) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera, private restService: UserServiceProvider) {
   }
 
   ionViewDidLoad() {
-  
+
   }
+
   getPicture() {
     let options: CameraOptions = {
       destinationType: this.camera.DestinationType.DATA_URL,
@@ -32,13 +35,36 @@ export class AskPage {
     this.camera.getPicture(options)
       .then(imageData => {
         this.image = `data:image/jpeg;base64,${imageData}`;
+        this.foto = this.image;
       })
       .catch(error => {
         console.error(error);
       });
   }
-  addAsk(){
-    return
+
+  addAsk() {
+    if(this.foto == null){
+      this.foto = '../../assets/imgs/sin-foto.png'
+    }
+    let body = {
+      Titulo: this.Titulo,
+      //Descripcion: this.Descripcion,
+      Fecha_alta: this.date = new Date().toLocaleDateString('en-GB'),
+      Foto_Principal: this.foto,
+    }
+
+
+    console.log(JSON.stringify(body));
+    this.restService.postPedido(body)
+         .then((result) => {
+             console.log(result);
+         }, (err) => {
+             console.log(err);
+         });
+   
+    this.navCtrl.pop();
+
+
   }
 
 }

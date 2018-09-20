@@ -1,7 +1,7 @@
 {
   "name": "autopartes",
-  "version": "0.0.1",
-  "author": "SolucionesGP",
+  "version": "0.9.1",
+  "author": "César Armando Olguín Morales",
   "homepage": "http://solucionesgp.com",
   "private": true,
   "scripts": {

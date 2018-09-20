@@ -13,12 +13,12 @@
 
   <ion-list inset>
       <ion-item>
-          <button ion-button block>Pedir AutoParte</button>
+          <button ion-button block (click)="pushPage();">Pedir AutoParte</button>
         </ion-item>
     <ion-item>
-        <button ion-item *ngFor="let art of articulos">
-            Busco -> {{ art.Titulo }}
-            <ion-badge color="secondary">500</ion-badge>
+        <button ion-item *ngFor="let ped of pedidos">
+            Busco -> {{ ped.Titulo }}
+            <ion-badge color="secondary">{{ ped.idPedido }}</ion-badge>
           </button> 
        
     </ion-item>

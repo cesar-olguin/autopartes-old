@@ -102,4 +102,20 @@ export class UserServiceProvider {
       });
     });
   }
+
+  postPedido(data){
+    return new Promise((resolve, reject) =>{
+      this.http.post(this.baseUrl + '/pedido/', data)
+      .subscribe(res => {
+        resolve(res);
+        console.log(data);
+      }, err => {
+        console.log(err);
+      });
+    });  
+  }
+
+  getPedidos(){
+    return this.http.get(this.baseUrl+'/pedido/');
+  }
 }
