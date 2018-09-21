@@ -8,9 +8,23 @@
 </ion-header>
 
 <ion-content padding>
-  <h1>
-    Usuario: Cesar
-  </h1>
+  <ion-list *ngFor="let user of Usuario">
+      <h1>
+          {{user.Nombre}}
+      </h1>
+      <h3>{{user.ApellidoP}} {{user.ApellidoM}}</h3>
+      <ion-item>
+        Celular -> {{user.Cell}}<br>
+        Correo -> {{user.Correo}}<br>
+        Fecha de Nacimiento -> {{user.Fecha_nac}}<br>
+        Miembro desde -> {{user.Fecha_alta}}
+      </ion-item>
+  </ion-list>
+  <button ion-button block (click)="close()">
+      <ion-icon item-start name="power"></ion-icon>
+        Cerrar Sesión
+      </button>
+  
   <ion-list-header color='primary'>
     Referencias:
   </ion-list-header>

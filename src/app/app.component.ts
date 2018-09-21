@@ -1,3 +1,4 @@
+import { Storage } from '@ionic/storage';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -25,34 +26,64 @@ export class MyApp {
 
   pages: Array<{title: string, component: any, icon: string}>;
   menuLogin: any;
-  
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  localStorage;
+  public Correo;
+  public Password;
+
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private storage: Storage) {
     this.initializeApp();
+    this.sideMenu();
+  }
 
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Cuenta', component: AccountPage, icon: 'paper' },
-      { title: 'Home', component: HomePage, icon: 'home' },
-      { title: 'Carrito', component: CarPage, icon: 'cart' },
-      { title: 'Favoritos', component: FavoritesPage, icon: 'star' },
-      { title: 'Articulos en Venta', component: VendorsPage, icon: 'cart' },
-      { title: 'Usuario', component: UserPage, icon: 'person' },
-    ];
-
+  sideMenu(){
+    this.storage.get('mail').then((val1) => {
+      this.storage.get('pass').then((val2) => {
+        this.Password = val2;
+        this.Correo = val1;
+        if(this.Correo != null || this.Password != null){
+          this.pages = [
+            //{ title: 'Cuenta', component: AccountPage, icon: 'paper' },
+            { title: 'Home', component: HomePage, icon: 'home' },
+            { title: 'Carrito', component: CarPage, icon: 'cart' },
+            { title: 'Favoritos', component: FavoritesPage, icon: 'star' },
+            { title: 'Articulos en Venta', component: VendorsPage, icon: 'cart' },
+            { title: 'Usuario', component: UserPage, icon: 'person' },
+          ];
+        }
+        else if(this.Correo == null || this.Password != null){
+          this.pages = [
+            { title: 'Cuenta', component: AccountPage, icon: 'paper' },
+            { title: 'Home', component: HomePage, icon: 'home' },
+            { title: 'Carrito', component: CarPage, icon: 'cart' },
+            { title: 'Favoritos', component: FavoritesPage, icon: 'star' },
+            { title: 'Articulos en Venta', component: VendorsPage, icon: 'cart' },
+            //{ title: 'Usuario', component: UserPage, icon: 'person' },
+          ];
+        }
+      });
+   });
+   
   
-    this.menuLogin = {
-      loginPage: LoginPage,
-      homePage: HomePage,
-      carPage: CarPage,
-      favoritesPage: FavoritesPage,
-      listPage: ListPage,
-      addArticle: AddArticlePage,
-      userPage: UserPage,
-      vendorsPage: VendorsPage,
-      singUpPage: SingUpPage,
-      accountPage: AccountPage,
-      articlePage: ArticlePage
-    }
+
+  this.storage.get('mail').then((val1) => {
+    this.storage.get('pass').then((val2) => {
+      
+    });
+ });
+
+  this.menuLogin = {
+    loginPage: LoginPage,
+    homePage: HomePage,
+    carPage: CarPage,
+    favoritesPage: FavoritesPage,
+    listPage: ListPage,
+    addArticle: AddArticlePage,
+    userPage: UserPage,
+    vendorsPage: VendorsPage,
+    singUpPage: SingUpPage,
+    accountPage: AccountPage,
+    articlePage: ArticlePage
+  }
   }
 
   initializeApp() {
