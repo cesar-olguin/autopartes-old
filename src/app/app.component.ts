@@ -37,7 +37,7 @@ export class MyApp {
       this.storage.get('pass').then((val2) => {
         this.Password = val2;
         this.Correo = val1;
-        if (this.Correo != null && this.Password != null) {
+        if (val1 != null && val2 != null) {
           this.pages = [
             //{ title: 'Cuenta', component: AccountPage, icon: 'paper' },
             { title: 'Home', component: HomePage, icon: 'home' },
@@ -47,7 +47,7 @@ export class MyApp {
             { title: 'Usuario', component: UserPage, icon: 'person' },
           ];
         }
-        else if (this.Correo == null && this.Password == null) {
+        else if (val1 == null && val2 == null) {
           this.pages = [
             { title: 'Cuenta', component: AccountPage, icon: 'paper' },
             { title: 'Home', component: HomePage, icon: 'home' },

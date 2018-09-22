@@ -45,8 +45,7 @@ export class UserPage {
 
   close(){
     this.storage.clear();
-    this.appCtrl.getRootNav().setRoot(HomePage);
-    window.location.reload()
+    window.location.reload(this.appCtrl.getRootNav().setRoot(HomePage));
   }
 
 

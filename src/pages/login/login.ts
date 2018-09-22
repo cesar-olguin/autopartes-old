@@ -45,8 +45,7 @@ export class LoginPage {
           this.trueLoggin();
           this.storage.set('mail', this.Correo);
           this.storage.set('pass', this.Password);
-          this.appCtrl.getRootNav().setRoot(HomePage);
-          window.location.reload()
+          window.location.reload(this.appCtrl.getRootNav().setRoot(HomePage));
         }
       });
     }
