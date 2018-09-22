@@ -24,7 +24,7 @@ export class MyApp {
 
   rootPage: any = HomePage;
 
-  pages: Array<{title: string, component: any, icon: string}>;
+  pages: Array<{ title: string, component: any, icon: string }>;
   menuLogin: any;
   localStorage;
   public Correo;
@@ -32,15 +32,12 @@ export class MyApp {
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private storage: Storage) {
     this.initializeApp();
-    this.sideMenu();
-  }
 
-  sideMenu(){
     this.storage.get('mail').then((val1) => {
       this.storage.get('pass').then((val2) => {
         this.Password = val2;
         this.Correo = val1;
-        if(this.Correo != null || this.Password != null){
+        if (this.Correo != null && this.Password != null) {
           this.pages = [
             //{ title: 'Cuenta', component: AccountPage, icon: 'paper' },
             { title: 'Home', component: HomePage, icon: 'home' },
@@ -50,7 +47,7 @@ export class MyApp {
             { title: 'Usuario', component: UserPage, icon: 'person' },
           ];
         }
-        else if(this.Correo == null || this.Password != null){
+        else if (this.Correo == null && this.Password == null) {
           this.pages = [
             { title: 'Cuenta', component: AccountPage, icon: 'paper' },
             { title: 'Home', component: HomePage, icon: 'home' },
@@ -61,29 +58,22 @@ export class MyApp {
           ];
         }
       });
-   });
-   
-  
-
-  this.storage.get('mail').then((val1) => {
-    this.storage.get('pass').then((val2) => {
-      
     });
- });
 
-  this.menuLogin = {
-    loginPage: LoginPage,
-    homePage: HomePage,
-    carPage: CarPage,
-    favoritesPage: FavoritesPage,
-    listPage: ListPage,
-    addArticle: AddArticlePage,
-    userPage: UserPage,
-    vendorsPage: VendorsPage,
-    singUpPage: SingUpPage,
-    accountPage: AccountPage,
-    articlePage: ArticlePage
-  }
+
+    this.menuLogin = {
+      loginPage: LoginPage,
+      homePage: HomePage,
+      carPage: CarPage,
+      favoritesPage: FavoritesPage,
+      listPage: ListPage,
+      addArticle: AddArticlePage,
+      userPage: UserPage,
+      vendorsPage: VendorsPage,
+      singUpPage: SingUpPage,
+      accountPage: AccountPage,
+      articlePage: ArticlePage
+    }
   }
 
   initializeApp() {
