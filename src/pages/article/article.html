@@ -46,13 +46,13 @@
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar> 
-    <ion-item>      
-      <ion-textarea round outline color="secondary">
+  <ion-toolbar>
+    <ion-item>
+      <ion-textarea [(ngModel)]="Comentario" color="secondary">
       </ion-textarea>
-      <button ion-button class="rounded" color="secondary" type="button" item-right>
-          <ion-icon name="send"> </ion-icon>
-        </button>
+      <button ion-button clear icon-only item-right (click)="postChat()">
+        <ion-icon name="send"> </ion-icon>
+      </button>
     </ion-item>
 
   </ion-toolbar>
