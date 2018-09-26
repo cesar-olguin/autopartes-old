@@ -1,3 +1,4 @@
+import { MyPostPage } from './../pages/my-post/my-post';
 import { AskPage } from './../pages/ask/ask';
 import { Camera } from '@ionic-native/camera';
 import { BrowserModule } from '@angular/platform-browser';
@@ -44,7 +45,8 @@ import { NativeStorage  } from '@ionic-native/native-storage';
     CameraPage,
     SingUpPage,
     AccountPage,
-    AskPage
+    AskPage,
+    MyPostPage
   ],
   imports: [
     BrowserModule,
@@ -73,7 +75,8 @@ import { NativeStorage  } from '@ionic-native/native-storage';
     CameraPage,
     SingUpPage,
     AccountPage,
-    AskPage
+    AskPage,
+    MyPostPage
 
   ],
   providers: [

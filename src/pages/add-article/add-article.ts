@@ -1,3 +1,4 @@
+import { NativeStorage } from '@ionic-native/native-storage';
 import { ArticlePage } from './../article/article';
 import { Component } from '@angular/core';
 import { NavController, NavParams, App } from 'ionic-angular';
@@ -20,16 +21,20 @@ import { UserServiceProvider } from './../../providers/user-service/user-service
 export class AddArticlePage {
 
   image: string = null;
-  myForm: FormGroup;
   date: string;
-  myFoto: FormGroup;
-  public foto;
-  
-  constructor(public navCtrl: NavController, public restService: UserServiceProvider, public navParams: NavParams, private camera: Camera, public formBuilder: FormBuilder, private appCtrl: App) {
-    this.myForm = this.createMyForm();
+  Titulo: string;
+  Descripcion: string;
+  Precio: string;
+  Fecha_alta: string;
+  Foto_Principal: string;
+  foto;
+  IdUser;
+
+  constructor(public navCtrl: NavController, public restService: UserServiceProvider, public navParams: NavParams, private camera: Camera, public formBuilder: FormBuilder, private appCtrl: App, private nativeStorage: NativeStorage) {
   }
 
   ionViewDidLoad() {
+
   }
 
   getPicture() {
@@ -43,39 +48,43 @@ export class AddArticlePage {
       .then(imageData => {
         this.image = `data:image/jpeg;base64,${imageData}`;
         this.foto = this.image;
-        this.myForm = this.createMyForm();
       })
       .catch(error => {
         console.error(error);
       });
   }
-
-  public createMyForm() {
-    if(this.foto == null){
-      this.foto = '../../assets/imgs/sin-foto.png'
-    }
-    return this.formBuilder.group({
-      Titulo: ['', Validators.required],
-      Descripcion: ['', Validators.required],
-      Precio: ['', Validators.required],
-      idUsuario: ['1'],
-      Cantidad: ['1'],
-      Ubicacion: ['Manzanillo,Colima,Mexico'],
-      Fecha_alta:[this.date = new Date().toLocaleDateString('en-GB')],
-      Fecha_modificacion:[''],
-      Foto_Principal:[this.foto, Validators.required]
-    });
-  }
-
+  
   addArticle() {
-    console.log(JSON.stringify(this.myForm.value));
-    console.log(this.foto);
-    this.restService.postArticulo(this.myForm.value).then((result) => {
-      console.log(result);
-    }, (err) => {
-      console.log(err);
+    this.nativeStorage.getItem('usID').then((data) => {
+      this.IdUser = data.property;
+      console.log('Usuario: ', this.IdUser);
+
+      if (this.foto == null) {
+        this.foto = '../../assets/imgs/sin-foto.png'
+      }
+
+      let body = {
+        Titulo: this.Titulo,
+        Descripcion: this.Descripcion,
+        Precio: this.Precio,
+        idUsuario: this.IdUser,
+        Cantidad: "1",
+        Ubicacion: "Manzanillo,Colima,Mexico",
+        Fecha_alta: this.date = new Date().toLocaleDateString('en-GB'),
+        //Fecha_modificacion: ,
+        Foto_Principal: this.foto,
+      }
+
+      console.log(JSON.stringify(body));
+      console.log(this.foto);
+      this.restService.postArticulo(body).then((result) => {
+        console.log(result);
+      }, (err) => {
+        console.log(err);
+      });
     });
-    this.appCtrl.getRootNav().setRoot(ArticlePage);
+
+    this.navCtrl.pop();
   }
 
 }

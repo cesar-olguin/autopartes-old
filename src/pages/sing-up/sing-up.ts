@@ -34,8 +34,6 @@ export class SingUpPage {
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, public restService: UserServiceProvider, public alertCtrl: AlertController, public viewCtrl: ViewController,
         public appCtrl: App) {
-        //this.myForm = this.createMyForm();
-        //this.pushPage = HomePage;
     }
 
     ionViewDidLoad() {
@@ -45,21 +43,6 @@ export class SingUpPage {
     pushPage() {
         this.navCtrl.pop();
         this.navCtrl.push(HomePage);
-    }
-
-    public createMyForm() {
-        return this.formBuilder.group({
-            Nombre: [''],
-            ApellidoP: [''],
-            ApellidoM: [''],
-            Correo: [''],
-            Contrasena: [''],
-            Confirmar: [],
-            Fecha_alta: [this.date = new Date().toLocaleDateString('en-GB')],
-            Cell: [''],
-            Fecha_nac: [''],
-            Genero: ['H']
-        });
     }
 
     addUser() {

@@ -1,5 +1,9 @@
+import { NativeStorage } from '@ionic-native/native-storage';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { UserServiceProvider } from '../../providers/user-service/user-service';
+import { ArticlePage } from '../article/article';
+import { AddArticlePage } from '../add-article/add-article';
 
 /**
  * Generated class for the MyPostPage page.
@@ -14,12 +18,47 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'my-post.html',
 })
 export class MyPostPage {
+  selectedItem: any;
+  Articulos: any;
+  modelos: any;
+  marcas: any[] = [];
+  selectModelo: any;
+  selectMarca: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  Usuario;
+
+  constructor(public navCtrl: NavController, public restService: UserServiceProvider, public navParams: NavParams, private nativeStorage: NativeStorage) {
+  }
+  ionViewDidLoad() {
+    
+      this.nativeStorage.getItem('usID').then((data) => {
+        this.Usuario = data.property;
+        console.log('El usuario es --> ', this.Usuario);
+        this.login();
+        
+      });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MyPostPage');
+  login() {   
+    this.restService.getArticuloByUser(this.Usuario).then(data => {
+      this.Articulos = data;
+      console.log(JSON.stringify(data));
+    });
+  }
+
+  itemTapped(artId) {
+    this.navCtrl.push(ArticlePage, {
+      art: artId.idArticulo
+    });
+  }
+
+
+  
+
+  addArticle(/*marcaId,modeloId*/) {
+    this.navCtrl.push(AddArticlePage, {
+      
+    });
   }
 
 }

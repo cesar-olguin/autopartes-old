@@ -1,6 +1,6 @@
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Component } from '@angular/core';
-import { NavController, NavParams, App } from 'ionic-angular';
+import { NavController, NavParams, App, Events } from 'ionic-angular';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
 import { Md5 } from 'ts-md5';
 import { Storage } from '@ionic/storage';
@@ -18,7 +18,7 @@ export class UserPage {
   Usuario : any;
   public IdUser;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public restService: UserServiceProvider, private storage: Storage, public appCtrl: App, private nativeStorage: NativeStorage) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public restService: UserServiceProvider, private storage: Storage, public appCtrl: App, private nativeStorage: NativeStorage, public events: Events) {
   // this.Correo = email.get('mail');
     //this.Password = passw.get('pass');
   }
@@ -31,7 +31,7 @@ export class UserPage {
         console.log('La contraseña es --> ', this.Password);
         console.log('El correo es --> ', this.Correo);
         this.login();
-        this.nativeStorage.setItem('usID', { property: "1"}).then(
+        this.nativeStorage.setItem('usID', { property: "2"}).then(
           data => console.log(data.property),
           error => console.error(error)
         );
@@ -49,7 +49,8 @@ export class UserPage {
 
   close(){
     this.nativeStorage.clear();
-    window.location.reload(this.appCtrl.getRootNav().setRoot(HomePage));
+    this.events.publish('user:loggedout');
+    this.appCtrl.getRootNav().setRoot(HomePage);
   }
 
 

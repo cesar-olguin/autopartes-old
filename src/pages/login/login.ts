@@ -3,7 +3,7 @@ import { NativeStorage } from '@ionic-native/native-storage';
 import { empty } from 'rxjs/Observer';
 import { UserServiceProvider } from './../../providers/user-service/user-service';
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController, App } from 'ionic-angular';
+import { NavController, NavParams, AlertController, App, Events } from 'ionic-angular';
 import { Md5 } from 'ts-md5/dist/md5';
 import { Storage } from '@ionic/storage';
 
@@ -23,8 +23,9 @@ export class LoginPage {
 
   public Correo;
   public Password;
+  Usuario;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public restService: UserServiceProvider, public alertCtrl: AlertController, private appCtrl: App, private storage: Storage, private nativeStorage: NativeStorage) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public restService: UserServiceProvider, public alertCtrl: AlertController, private appCtrl: App, private storage: Storage, private nativeStorage: NativeStorage, public events: Events) {
   }
 
   ionViewDidLoad() {
@@ -42,21 +43,34 @@ export class LoginPage {
           this.sinDatos();
         }
         else {
-          console.log(JSON.parse(JSON.stringify(data)));
-          //Sql
-          //this.storage.set('mail', this.Correo);
-          //this.storage.set('pass', this.Password);
 
-          //Cordova (Nativo)
-          this.nativeStorage.setItem('mail', { property: this.Correo }).then(
-            data => console.log(data.property),
-            error => console.error(error)
-          );
-          this.nativeStorage.setItem('pass', { property: this.Password }).then(
-            data => console.log(data.property),
-            error => console.error(error)
-          );
-          this.appCtrl.getRootNav().setRoot(UserPage);
+          this.restService.checkEmail(this.Correo).then(data => {
+            this.Usuario = data;
+            console.log(JSON.stringify(data));
+          });
+
+          if (this.Usuario == "[]"){
+            console.log(JSON.parse(JSON.stringify(data)));
+            //Sql
+            //this.storage.set('mail', this.Correo);
+            //this.storage.set('pass', this.Password);
+  
+            //Cordova (Nativo)
+            this.nativeStorage.setItem('mail', { property: this.Correo }).then(
+              data => console.log(data.property),
+              error => console.error(error)
+            );
+            this.nativeStorage.setItem('pass', { property: this.Password }).then(
+              data => console.log(data.property),
+              error => console.error(error)
+            );
+            this.events.publish('user:loggedin');
+            this.appCtrl.getRootNav().setRoot(UserPage);
+          }
+          else{
+            this.correoError();
+          }
+
         }
       });
     }
@@ -71,5 +85,13 @@ export class LoginPage {
     alert.present();
   }
 
+  correoError() {
+    let alert = this.alertCtrl.create({
+      title: 'ERROR',
+      subTitle: 'Usuario ya existe.',
+      buttons: ['Aceptar']
+    });
+    alert.present();
+  }
 
 }

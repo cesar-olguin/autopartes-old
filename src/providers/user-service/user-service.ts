@@ -47,6 +47,15 @@ export class UserServiceProvider {
       });
     });
   }
+  getArticuloByUser(id) {
+    return new Promise(resolve => {
+      this.http.get(this.baseUrl + '/articulo/usuario/' + id).subscribe(data => {
+        resolve(data)
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
 
   getComentarios(id) {
     return new Promise(resolve => {
@@ -108,6 +117,16 @@ export class UserServiceProvider {
   getLoggin(email, password) {
     return new Promise(resolve => {
       this.http.get(this.baseUrl + '/registro/' + email + '/' + password).subscribe(data => {
+        resolve(data)
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+
+  checkEmail(email){
+    return new Promise(resolve => {
+      this.http.get(this.baseUrl + '/registro/' + email).subscribe(data => {
         resolve(data)
       }, err => {
         console.log(err);

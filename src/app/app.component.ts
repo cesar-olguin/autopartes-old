@@ -1,7 +1,7 @@
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Storage } from '@ionic/storage';
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -16,6 +16,7 @@ import { SingUpPage } from './../pages/sing-up/sing-up';
 import { UserPage } from './../pages/user/user';
 import { AccountPage } from './../pages/account/account';
 import { ArticlePage } from './../pages/article/article';
+import { MyPostPage } from '../pages/my-post/my-post';
 
 @Component({
   templateUrl: 'app.html'
@@ -31,10 +32,42 @@ export class MyApp {
   public Correo;
   public Password;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private storage: Storage, private nativeStorage: NativeStorage) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private storage: Storage, private nativeStorage: NativeStorage, events: Events) {
     this.initializeApp();
 
-    this.nativeStorage.getItem('mail').then((data) => {
+    this.pages = [
+      { title: 'Cuenta', component: AccountPage, icon: 'paper' },
+      { title: 'Home', component: HomePage, icon: 'home' },
+      { title: 'Carrito', component: CarPage, icon: 'cart' },
+      { title: 'Favoritos', component: FavoritesPage, icon: 'star' },
+      { title: 'Articulos en Venta', component: VendorsPage, icon: 'cart' },
+    ];
+
+    events.subscribe('user:loggedin',() => {
+      this.pages = [
+        //{ title: 'Cuenta', component: AccountPage, icon: 'paper' },
+        { title: 'Home', component: HomePage, icon: 'home' },
+        { title: 'Carrito', component: CarPage, icon: 'cart' },
+        { title: 'Favoritos', component: FavoritesPage, icon: 'star' },
+        { title: 'Articulos en Venta', component: VendorsPage, icon: 'cart' },
+        { title: 'Usuario', component: UserPage, icon: 'person' },
+        { title: 'Mis Ventas', component: MyPostPage, icon: 'cart' }
+      ];
+    });
+
+    events.subscribe('user:loggedout',() => {
+      this.pages = [
+        //{ title: 'Cuenta', component: AccountPage, icon: 'paper' },
+        { title: 'Home', component: HomePage, icon: 'home' },
+        { title: 'Carrito', component: CarPage, icon: 'cart' },
+        { title: 'Favoritos', component: FavoritesPage, icon: 'star' },
+        { title: 'Articulos en Venta', component: VendorsPage, icon: 'cart' },
+        { title: 'Usuario', component: UserPage, icon: 'person' },
+        { title: 'Mis Ventas', component: MyPostPage, icon: 'cart' }
+      ];
+    });
+
+    /*this.nativeStorage.getItem('mail').then((data) => {
       this.nativeStorage.getItem('pass').then((data2) => {
         this.Correo = data.property;
         this.Password = data2.property;
@@ -48,61 +81,12 @@ export class MyApp {
             { title: 'Favoritos', component: FavoritesPage, icon: 'star' },
             { title: 'Articulos en Venta', component: VendorsPage, icon: 'cart' },
             { title: 'Usuario', component: UserPage, icon: 'person' },
+            { title: 'Mis Ventas', component: MyPostPage, icon: 'cart' }
           ];
         }
-      });
-    });
-
-    this.pages = [
-      { title: 'Cuenta', component: AccountPage, icon: 'paper' },
-      { title: 'Home', component: HomePage, icon: 'home' },
-      { title: 'Carrito', component: CarPage, icon: 'cart' },
-      { title: 'Favoritos', component: FavoritesPage, icon: 'star' },
-      { title: 'Articulos en Venta', component: VendorsPage, icon: 'cart' },
-    ];
-
-   /* this.storage.get('mail').then((val1) => {
-      this.storage.get('pass').then((val2) => {
-        this.Password = val2;
-        this.Correo = val1;
-        if (val1 != null && val2 != null) {
-          this.pages = [
-            //{ title: 'Cuenta', component: AccountPage, icon: 'paper' },
-            { title: 'Home', component: HomePage, icon: 'home' },
-            { title: 'Carrito', component: CarPage, icon: 'cart' },
-            { title: 'Favoritos', component: FavoritesPage, icon: 'star' },
-            { title: 'Articulos en Venta', component: VendorsPage, icon: 'cart' },
-            { title: 'Usuario', component: UserPage, icon: 'person' },
-          ];
-        }
-        else if (val1 == null && val2 == null) {
-          this.pages = [
-            { title: 'Cuenta', component: AccountPage, icon: 'paper' },
-            { title: 'Home', component: HomePage, icon: 'home' },
-            { title: 'Carrito', component: CarPage, icon: 'cart' },
-            { title: 'Favoritos', component: FavoritesPage, icon: 'star' },
-            { title: 'Articulos en Venta', component: VendorsPage, icon: 'cart' },
-            { title: 'Usuario', component: UserPage, icon: 'person' },
-          ];
-        }
-
       });
     });*/
 
-
-    this.menuLogin = {
-      loginPage: LoginPage,
-      homePage: HomePage,
-      carPage: CarPage,
-      favoritesPage: FavoritesPage,
-      listPage: ListPage,
-      addArticle: AddArticlePage,
-      userPage: UserPage,
-      vendorsPage: VendorsPage,
-      singUpPage: SingUpPage,
-      accountPage: AccountPage,
-      articlePage: ArticlePage
-    }
   }
 
   initializeApp() {
