@@ -33,27 +33,27 @@ export class ArticlePage {
   }
 
   postChat() {
-
-    this.nativeStorage.getItem('usID').then((data) => {
+    this.nativeStorage.getItem('idUser').then((data) => {
       this.IdUser = data.property;
       console.log('Usuario: ', this.IdUser);
-    });
 
-    let body = {
-      idArticulo: this.idSelected,
-      idUsuario: this.IdUser,
-      Comentario: this.Comentario,
-    }
-    console.log(JSON.stringify(body));
-    this.restService.postComentario(body).then(
-      result => {
-        console.log(result);
-        this.loadChat();
-      },
-      err => {
-        console.log(err);
+      let body = {
+        idArticulo: this.idSelected,
+        idUsuario: this.IdUser,
+        Comentario: this.Comentario,
       }
-    );
+
+      console.log(JSON.stringify(body));
+      this.restService.postComentario(body).then(
+        result => {
+          console.log(result);
+          this.loadChat();
+        },
+        err => {
+          console.log(err);
+        }
+      );
+    });
   }
 
   loadArt(){

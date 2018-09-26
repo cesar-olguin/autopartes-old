@@ -21,9 +21,8 @@ import { Storage } from '@ionic/storage';
 export class LoginPage {
 
 
-  public Correo;
+  public Usuario;
   public Password;
-  Usuario;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public restService: UserServiceProvider, public alertCtrl: AlertController, private appCtrl: App, private storage: Storage, private nativeStorage: NativeStorage, public events: Events) {
   }
@@ -33,30 +32,18 @@ export class LoginPage {
   }
 
   login() {
-    if (this.Correo == empty || this.Password == empty) {
+    if (this.Usuario == empty || this.Password == empty) {
       this.sinDatos();
     }
     else {
-      this.restService.getLoggin(this.Correo, Md5.hashStr(this.Password)).then(data => {
+      this.restService.getLoggin(this.Usuario, Md5.hashStr(this.Password)).then(data => {
         console.log(JSON.stringify(data));
         if ((JSON.stringify(data)) == "[]") {
-          this.sinDatos();
+          this.correoError();
         }
         else {
 
-          this.restService.checkEmail(this.Correo).then(data => {
-            this.Usuario = data;
-            console.log(JSON.stringify(data));
-          });
-
-          if (this.Usuario == "[]"){
-            console.log(JSON.parse(JSON.stringify(data)));
-            //Sql
-            //this.storage.set('mail', this.Correo);
-            //this.storage.set('pass', this.Password);
-  
-            //Cordova (Nativo)
-            this.nativeStorage.setItem('mail', { property: this.Correo }).then(
+            this.nativeStorage.setItem('user', { property: this.Usuario }).then(
               data => console.log(data.property),
               error => console.error(error)
             );
@@ -66,10 +53,7 @@ export class LoginPage {
             );
             this.events.publish('user:loggedin');
             this.appCtrl.getRootNav().setRoot(UserPage);
-          }
-          else{
-            this.correoError();
-          }
+          
 
         }
       });
@@ -79,7 +63,7 @@ export class LoginPage {
   sinDatos() {
     let alert = this.alertCtrl.create({
       title: 'ERROR',
-      subTitle: 'Correo o Contraseña equivocados.',
+      subTitle: 'Llena los campos.',
       buttons: ['Aceptar']
     });
     alert.present();
@@ -88,7 +72,7 @@ export class LoginPage {
   correoError() {
     let alert = this.alertCtrl.create({
       title: 'ERROR',
-      subTitle: 'Usuario ya existe.',
+      subTitle: 'Error en el usuario y/o contraseña.',
       buttons: ['Aceptar']
     });
     alert.present();

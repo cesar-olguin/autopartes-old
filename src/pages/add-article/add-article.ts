@@ -3,8 +3,7 @@ import { ArticlePage } from './../article/article';
 import { Component } from '@angular/core';
 import { NavController, NavParams, App } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-//import { Http, Headers, RequestOptions } from '@angular/common/http';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Http, Headers, RequestOptions } from '@angular/common/http';
 import { UserServiceProvider } from './../../providers/user-service/user-service';
 
 /**
@@ -28,9 +27,9 @@ export class AddArticlePage {
   Fecha_alta: string;
   Foto_Principal: string;
   foto;
-  IdUser;
+  Usuario;
 
-  constructor(public navCtrl: NavController, public restService: UserServiceProvider, public navParams: NavParams, private camera: Camera, public formBuilder: FormBuilder, private appCtrl: App, private nativeStorage: NativeStorage) {
+  constructor(public navCtrl: NavController, public restService: UserServiceProvider, public navParams: NavParams, private camera: Camera, private appCtrl: App, private nativeStorage: NativeStorage) {
   }
 
   ionViewDidLoad() {
@@ -55,10 +54,10 @@ export class AddArticlePage {
   }
   
   addArticle() {
-    this.nativeStorage.getItem('usID').then((data) => {
-      this.IdUser = data.property;
-      console.log('Usuario: ', this.IdUser);
-
+    this.nativeStorage.getItem('idUser').then((dataID) => {
+      this.Usuario = dataID.property;
+      console.log('Usuario: ', this.Usuario);
+     
       if (this.foto == null) {
         this.foto = '../../assets/imgs/sin-foto.png'
       }
@@ -67,7 +66,7 @@ export class AddArticlePage {
         Titulo: this.Titulo,
         Descripcion: this.Descripcion,
         Precio: this.Precio,
-        idUsuario: this.IdUser,
+        idUsuario: this.Usuario,
         Cantidad: "1",
         Ubicacion: "Manzanillo,Colima,Mexico",
         Fecha_alta: this.date = new Date().toLocaleDateString('en-GB'),
@@ -76,12 +75,13 @@ export class AddArticlePage {
       }
 
       console.log(JSON.stringify(body));
-      console.log(this.foto);
+      /*console.log(this.foto);
       this.restService.postArticulo(body).then((result) => {
         console.log(result);
       }, (err) => {
         console.log(err);
-      });
+      });*/
+
     });
 
     this.navCtrl.pop();

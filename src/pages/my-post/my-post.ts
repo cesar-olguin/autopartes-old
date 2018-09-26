@@ -30,19 +30,13 @@ export class MyPostPage {
   constructor(public navCtrl: NavController, public restService: UserServiceProvider, public navParams: NavParams, private nativeStorage: NativeStorage) {
   }
   ionViewDidLoad() {
-    
-      this.nativeStorage.getItem('usID').then((data) => {
-        this.Usuario = data.property;
-        console.log('El usuario es --> ', this.Usuario);
-        this.login();
-        
+    this.nativeStorage.getItem('idUser').then((data) => {
+      this.Usuario = data.property;
+      console.log('Usuario: ', this.Usuario);
+      this.restService.getArticuloByUser(this.Usuario).then(data => {
+        this.Articulos = data;
+        console.log(JSON.stringify(data));
       });
-  }
-
-  login() {   
-    this.restService.getArticuloByUser(this.Usuario).then(data => {
-      this.Articulos = data;
-      console.log(JSON.stringify(data));
     });
   }
 

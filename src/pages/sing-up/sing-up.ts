@@ -30,6 +30,7 @@ export class SingUpPage {
     Confirmar: string;
     Fecha_nac: string;
     Genero: string;
+    Usuario;
     //pushPage: any;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, public restService: UserServiceProvider, public alertCtrl: AlertController, public viewCtrl: ViewController,
@@ -68,15 +69,24 @@ export class SingUpPage {
             this.camposVacios();
         }
         else {
-            console.log(JSON.stringify(body));
-            this.restService.postRegistro(body)
-                .then((result) => {
-                    console.log(result);
-                }, (err) => {
-                    console.log(err);
-                });
-            this.userAdded();
-            this.navCtrl.push(LoginPage);
+            this.restService.checkEmail(this.Correo).then(data => {
+                this.Usuario = data;
+                console.log(JSON.stringify(data));
+              });
+              if(this.Usuario=="[]"){
+                console.log(JSON.stringify(body));
+                this.restService.postRegistro(body)
+                    .then((result) => {
+                        console.log(result);
+                    }, (err) => {
+                        console.log(err);
+                    });
+                this.userAdded();
+                this.navCtrl.push(LoginPage);
+              }
+              else{
+                this.userCheck();
+              }
         }
     }
 
@@ -102,6 +112,15 @@ export class SingUpPage {
         let alert = this.alertCtrl.create({
             title: 'BIEN',
             subTitle: 'Tu usuario fue registrado.',
+            buttons: ['Aceptar'],
+        });
+        alert.present();
+    }
+
+    userCheck() {
+        let alert = this.alertCtrl.create({
+            title: 'ERROR',
+            subTitle: 'El usuario ya existe.',
             buttons: ['Aceptar'],
         });
         alert.present();

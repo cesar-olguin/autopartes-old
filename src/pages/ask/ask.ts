@@ -1,3 +1,4 @@
+import { NativeStorage } from '@ionic-native/native-storage';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -17,8 +18,9 @@ export class AskPage {
   Fecha_alta: string;
   Foto_Principal: string;
   foto;
+  IdUser;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera, private restService: UserServiceProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera, private restService: UserServiceProvider, public nativeStorage: NativeStorage) {
   }
 
   ionViewDidLoad() {
@@ -43,28 +45,32 @@ export class AskPage {
   }
 
   addAsk() {
-    if(this.foto == null){
-      this.foto = '../../assets/imgs/sin-foto.png'
-    }
-    let body = {
-      Titulo: this.Titulo,
-      //Descripcion: this.Descripcion,
-      Fecha_alta: this.date = new Date().toLocaleDateString('en-GB'),
-      Foto_Principal: this.foto,
-    }
+    this.nativeStorage.getItem('idUser').then((data) => {
+      this.IdUser = data.property;
+      console.log('Usuario: ', this.IdUser);
 
+      if(this.foto == null){
+        this.foto = '../../assets/imgs/sin-foto.png'
+      }
+      let body = {
+        idUsuario: this.IdUser,
+        Titulo: this.Titulo,
+        Descripcion: this.Descripcion,
+        Fecha_alta: this.date = new Date().toLocaleDateString('en-GB'),
+        Foto_Principal: this.foto,
+      }
+  
+      console.log(JSON.stringify(body));
+      this.restService.postPedido(body)
+           .then((result) => {
+               console.log(result);
+           }, (err) => {
+               console.log(err);
+           });
+     
+      this.navCtrl.pop();
 
-    console.log(JSON.stringify(body));
-    this.restService.postPedido(body)
-         .then((result) => {
-             console.log(result);
-         }, (err) => {
-             console.log(err);
-         });
-   
-    this.navCtrl.pop();
-
-
+    });
   }
 
 }

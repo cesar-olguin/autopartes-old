@@ -24,17 +24,13 @@ export class UserPage {
   }
 
   ionViewDidLoad() {
-    this.nativeStorage.getItem('mail').then((data) => {
+    this.nativeStorage.getItem('user').then((data) => {
       this.nativeStorage.getItem('pass').then((data2) => {
         this.Correo = data.property;
         this.Password = data2.property;
         console.log('La contraseña es --> ', this.Password);
         console.log('El correo es --> ', this.Correo);
         this.login();
-        this.nativeStorage.setItem('usID', { property: "2"}).then(
-          data => console.log(data.property),
-          error => console.error(error)
-        );
       });
     });
   }
@@ -44,6 +40,14 @@ export class UserPage {
     this.restService.getLoggin(this.Correo, Md5.hashStr(this.Password)).then(data => {
       this.Usuario = data;
       console.log(JSON.stringify(data));
+
+      let obj = JSON.parse(this.Usuario);
+      console.log(obj.myString);
+
+      this.nativeStorage.setItem('idUser', { property: obj.idUsuario }).then(
+        data => console.log("ID Usuario -> "+data.property),
+        error => console.error(error)
+      );
     });
   }
 

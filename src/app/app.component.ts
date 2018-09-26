@@ -66,27 +66,6 @@ export class MyApp {
         { title: 'Mis Ventas', component: MyPostPage, icon: 'cart' }
       ];
     });
-
-    /*this.nativeStorage.getItem('mail').then((data) => {
-      this.nativeStorage.getItem('pass').then((data2) => {
-        this.Correo = data.property;
-        this.Password = data2.property;
-        console.log('La contraseña es --> ', this.Password);
-        console.log('El correo es --> ', this.Correo);
-        if (this.Correo > "" && this.Password > "") {
-          this.pages = [
-            //{ title: 'Cuenta', component: AccountPage, icon: 'paper' },
-            { title: 'Home', component: HomePage, icon: 'home' },
-            { title: 'Carrito', component: CarPage, icon: 'cart' },
-            { title: 'Favoritos', component: FavoritesPage, icon: 'star' },
-            { title: 'Articulos en Venta', component: VendorsPage, icon: 'cart' },
-            { title: 'Usuario', component: UserPage, icon: 'person' },
-            { title: 'Mis Ventas', component: MyPostPage, icon: 'cart' }
-          ];
-        }
-      });
-    });*/
-
   }
 
   initializeApp() {
