@@ -1,4 +1,5 @@
-import { HomePage } from './../home/home';
+import { UserPage } from './../user/user';
+import { NativeStorage } from '@ionic-native/native-storage';
 import { empty } from 'rxjs/Observer';
 import { UserServiceProvider } from './../../providers/user-service/user-service';
 import { Component } from '@angular/core';
@@ -22,8 +23,8 @@ export class LoginPage {
 
   public Correo;
   public Password;
-  
-  constructor(public navCtrl: NavController, public navParams: NavParams, public restService: UserServiceProvider, public alertCtrl: AlertController, private appCtrl: App, private storage: Storage) {
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public restService: UserServiceProvider, public alertCtrl: AlertController, private appCtrl: App, private storage: Storage, private nativeStorage: NativeStorage) {
   }
 
   ionViewDidLoad() {
@@ -37,15 +38,25 @@ export class LoginPage {
     else {
       this.restService.getLoggin(this.Correo, Md5.hashStr(this.Password)).then(data => {
         console.log(JSON.stringify(data));
-        if((JSON.stringify(data)) == "[]"){
+        if ((JSON.stringify(data)) == "[]") {
           this.sinDatos();
         }
-        else{
+        else {
           console.log(JSON.parse(JSON.stringify(data)));
-          this.trueLoggin();
-          this.storage.set('mail', this.Correo);
-          this.storage.set('pass', this.Password);
-          window.location.reload(this.appCtrl.getRootNav().setRoot(HomePage));
+          //Sql
+          //this.storage.set('mail', this.Correo);
+          //this.storage.set('pass', this.Password);
+
+          //Cordova (Nativo)
+          this.nativeStorage.setItem('mail', { property: this.Correo }).then(
+            data => console.log(data.property),
+            error => console.error(error)
+          );
+          this.nativeStorage.setItem('pass', { property: this.Password }).then(
+            data => console.log(data.property),
+            error => console.error(error)
+          );
+          this.appCtrl.getRootNav().setRoot(UserPage);
         }
       });
     }
@@ -60,13 +71,5 @@ export class LoginPage {
     alert.present();
   }
 
-  trueLoggin() {
-    let alert = this.alertCtrl.create({
-      title: 'Bien',
-      subTitle: 'Sesión Exitosa',
-      buttons: ['Aceptar']
-    });
-    alert.present();
-  }
 
 }

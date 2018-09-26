@@ -26,6 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthProvider } from '../providers/auth/auth';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 import { IonicStorageModule } from '@ionic/storage';
+import { NativeStorage  } from '@ionic-native/native-storage';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { IonicStorageModule } from '@ionic/storage';
     UserServiceProvider,
     Camera,
     AuthProvider,
-    AuthServiceProvider
+    AuthServiceProvider,
+    NativeStorage 
   ]
 })
 export class AppModule {}

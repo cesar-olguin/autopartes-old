@@ -1,3 +1,4 @@
+import { NativeStorage } from '@ionic-native/native-storage';
 import { Storage } from '@ionic/storage';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
@@ -30,10 +31,37 @@ export class MyApp {
   public Correo;
   public Password;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private storage: Storage) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private storage: Storage, private nativeStorage: NativeStorage) {
     this.initializeApp();
 
-    this.storage.get('mail').then((val1) => {
+    this.nativeStorage.getItem('mail').then((data) => {
+      this.nativeStorage.getItem('pass').then((data2) => {
+        this.Correo = data.property;
+        this.Password = data2.property;
+        console.log('La contraseña es --> ', this.Password);
+        console.log('El correo es --> ', this.Correo);
+        if (this.Correo > "" && this.Password > "") {
+          this.pages = [
+            //{ title: 'Cuenta', component: AccountPage, icon: 'paper' },
+            { title: 'Home', component: HomePage, icon: 'home' },
+            { title: 'Carrito', component: CarPage, icon: 'cart' },
+            { title: 'Favoritos', component: FavoritesPage, icon: 'star' },
+            { title: 'Articulos en Venta', component: VendorsPage, icon: 'cart' },
+            { title: 'Usuario', component: UserPage, icon: 'person' },
+          ];
+        }
+      });
+    });
+
+    this.pages = [
+      { title: 'Cuenta', component: AccountPage, icon: 'paper' },
+      { title: 'Home', component: HomePage, icon: 'home' },
+      { title: 'Carrito', component: CarPage, icon: 'cart' },
+      { title: 'Favoritos', component: FavoritesPage, icon: 'star' },
+      { title: 'Articulos en Venta', component: VendorsPage, icon: 'cart' },
+    ];
+
+   /* this.storage.get('mail').then((val1) => {
       this.storage.get('pass').then((val2) => {
         this.Password = val2;
         this.Correo = val1;
@@ -54,11 +82,12 @@ export class MyApp {
             { title: 'Carrito', component: CarPage, icon: 'cart' },
             { title: 'Favoritos', component: FavoritesPage, icon: 'star' },
             { title: 'Articulos en Venta', component: VendorsPage, icon: 'cart' },
-            //{ title: 'Usuario', component: UserPage, icon: 'person' },
+            { title: 'Usuario', component: UserPage, icon: 'person' },
           ];
         }
+
       });
-    });
+    });*/
 
 
     this.menuLogin = {

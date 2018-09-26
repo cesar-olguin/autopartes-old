@@ -1,3 +1,4 @@
+import { NativeStorage } from '@ionic-native/native-storage';
 import { Component } from "@angular/core";
 import { NavController, NavParams } from "ionic-angular";
 import { UserServiceProvider } from "./../../providers/user-service/user-service";
@@ -13,8 +14,9 @@ export class ArticlePage {
   idArticulo;
   idUsuario;
   Comentario;
+  IdUser;
 
-  constructor(public navCtrl: NavController, public restService: UserServiceProvider, public navArt: NavParams) {
+  constructor(public navCtrl: NavController, public restService: UserServiceProvider, public navArt: NavParams, private nativeStorage: NativeStorage) {
     this.idSelected = navArt.get("art");
     this.idArticulo = this.idSelected;
     this.loadArt();
@@ -31,9 +33,15 @@ export class ArticlePage {
   }
 
   postChat() {
+
+    this.nativeStorage.getItem('usID').then((data) => {
+      this.IdUser = data.property;
+      console.log('Usuario: ', this.IdUser);
+    });
+
     let body = {
-      idArticulo: (this.idSelected),
-      idUsuario: "1",
+      idArticulo: this.idSelected,
+      idUsuario: this.IdUser,
       Comentario: this.Comentario,
     }
     console.log(JSON.stringify(body));

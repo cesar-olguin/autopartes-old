@@ -1,3 +1,4 @@
+import { NativeStorage } from '@ionic-native/native-storage';
 import { Component } from '@angular/core';
 import { NavController, NavParams, App } from 'ionic-angular';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
@@ -14,29 +15,32 @@ export class UserPage {
 
   public Correo;
   public Password;
-   Usuario : any;
+  Usuario : any;
+  public IdUser;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public restService: UserServiceProvider, private storage: Storage, public appCtrl: App) {
-   // this.Correo = email.get('mail');
+  constructor(public navCtrl: NavController, public navParams: NavParams, public restService: UserServiceProvider, private storage: Storage, public appCtrl: App, private nativeStorage: NativeStorage) {
+  // this.Correo = email.get('mail');
     //this.Password = passw.get('pass');
   }
 
   ionViewDidLoad() {
-    //console.log(this.Correo);
-    //
-    this.storage.get('mail').then((val1) => {
-      this.storage.get('pass').then((val2) => {
-        this.Password = val2;
-        this.Correo = val1;
+    this.nativeStorage.getItem('mail').then((data) => {
+      this.nativeStorage.getItem('pass').then((data2) => {
+        this.Correo = data.property;
+        this.Password = data2.property;
         console.log('La contraseña es --> ', this.Password);
         console.log('El correo es --> ', this.Correo);
         this.login();
+        this.nativeStorage.setItem('usID', { property: "1"}).then(
+          data => console.log(data.property),
+          error => console.error(error)
+        );
       });
-   });
+    });
   }
 
 
-  login() {
+  login() {   
     this.restService.getLoggin(this.Correo, Md5.hashStr(this.Password)).then(data => {
       this.Usuario = data;
       console.log(JSON.stringify(data));
@@ -44,7 +48,7 @@ export class UserPage {
   }
 
   close(){
-    this.storage.clear();
+    this.nativeStorage.clear();
     window.location.reload(this.appCtrl.getRootNav().setRoot(HomePage));
   }
 
