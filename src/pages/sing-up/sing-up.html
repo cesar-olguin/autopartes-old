@@ -39,12 +39,12 @@
             <ion-input [(ngModel)]="Cell" type="tel"></ion-input>
           </ion-item>
           <ion-item>
-              <ion-icon item-start name="eye"></ion-icon>
+              <ion-icon item-start name="key"></ion-icon>
             <ion-label color="primary" autocomplete="on" autocorrect="on" floating>Contraseña</ion-label>
             <ion-input [(ngModel)]="Contrasena" type="password"></ion-input>
           </ion-item>
           <ion-item>
-              <ion-icon item-start name="eye"></ion-icon>
+              <ion-icon item-start name="key"></ion-icon>
               <ion-label color="primary" autocomplete="on" autocorrect="on" floating>Confirmar Contraseña</ion-label>
               <ion-input [(ngModel)]="Confirmar" type="password"></ion-input>
             </ion-item>
@@ -75,6 +75,6 @@
 
 
 
-  <button menuClose ion-button block (click)="addUser()">Registrarse</button>
+  <button ion-button block (click)="addUser()">Registrarse</button>
 
 </ion-content>

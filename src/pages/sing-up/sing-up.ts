@@ -47,46 +47,45 @@ export class SingUpPage {
     }
 
     addUser() {
-        if (this.Genero != 'H') {
-            this.Genero = 'M';
-        }
-        let body = {
-            Nombre: this.Nombre,
-            ApellidoP: this.ApellidoP,
-            ApellidoM: this.ApellidoM,
-            Correo: this.Correo,
-            Cell: this.Cell,
-            Contrasena: Md5.hashStr(this.Contrasena),
-            Confirmar: Md5.hashStr(this.Confirmar),
-            Fecha_nac: this.Fecha_nac = new Date().toLocaleDateString('en-GB'),
-            Genero: this.Genero,
-            Fecha_alta: this.date = new Date().toLocaleDateString('en-GB')
-        }
         if (this.Contrasena != this.Confirmar) {
             this.noCoinciden();
         }
-        else if (this.Nombre == '' || this.ApellidoP == '' || this.ApellidoM == '' || this.Correo == '' || this.Cell == '' || this.Fecha_nac == '') {
+        else if (this.Nombre == null || this.ApellidoP == null || this.ApellidoM == null || this.Correo == null || this.Cell == null || this.Fecha_nac == null) {
             this.camposVacios();
         }
         else {
+            if (this.Genero != 'H') {
+                this.Genero = 'M';
+            }
+            let body = {
+                Nombre: this.Nombre,
+                ApellidoP: this.ApellidoP,
+                ApellidoM: this.ApellidoM,
+                Correo: this.Correo,
+                Cell: this.Cell,
+                Contrasena: Md5.hashStr(this.Contrasena),
+                Confirmar: Md5.hashStr(this.Confirmar),
+                Fecha_nac: this.Fecha_nac = new Date().toLocaleDateString('en-GB'),
+                Genero: this.Genero,
+                Fecha_alta: this.date = new Date().toLocaleDateString('en-GB')
+            }
             this.restService.checkEmail(this.Correo).then(data => {
-                this.Usuario = data;
-                console.log(JSON.stringify(data));
-              });
-              if(this.Usuario=="[]"){
-                console.log(JSON.stringify(body));
-                this.restService.postRegistro(body)
-                    .then((result) => {
-                        console.log(result);
-                    }, (err) => {
-                        console.log(err);
-                    });
-                this.userAdded();
-                this.navCtrl.push(LoginPage);
-              }
-              else{
-                this.userCheck();
-              }
+                this.Usuario = JSON.stringify(data);
+                if (this.Usuario == "[]") {
+                    console.log(JSON.stringify(body));
+                    this.restService.postRegistro(body)
+                        .then((result) => {
+                            console.log(result);
+                        }, (err) => {
+                            console.log(err);
+                        });
+                    this.userAdded();
+                    this.navCtrl.push(LoginPage);
+                }
+                else {
+                    this.userCheck();
+                }
+            });
         }
     }
 
