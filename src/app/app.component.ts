@@ -38,8 +38,6 @@ export class MyApp {
     this.pages = [
       { title: 'Cuenta', component: AccountPage, icon: 'paper' },
       { title: 'Home', component: HomePage, icon: 'home' },
-      { title: 'Carrito', component: CarPage, icon: 'cart' },
-      { title: 'Favoritos', component: FavoritesPage, icon: 'star' },
       { title: 'Articulos en Venta', component: VendorsPage, icon: 'cart' },
     ];
 
@@ -57,13 +55,10 @@ export class MyApp {
 
     events.subscribe('user:loggedout',() => {
       this.pages = [
-        //{ title: 'Cuenta', component: AccountPage, icon: 'paper' },
+        { title: 'Cuenta', component: AccountPage, icon: 'paper' },
         { title: 'Home', component: HomePage, icon: 'home' },
-        { title: 'Carrito', component: CarPage, icon: 'cart' },
-        { title: 'Favoritos', component: FavoritesPage, icon: 'star' },
         { title: 'Articulos en Venta', component: VendorsPage, icon: 'cart' },
-        { title: 'Usuario', component: UserPage, icon: 'person' },
-        { title: 'Mis Ventas', component: MyPostPage, icon: 'cart' }
+      
       ];
     });
   }
