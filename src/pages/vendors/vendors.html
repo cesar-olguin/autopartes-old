@@ -4,7 +4,7 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-toolbar color="primary">
-        <ion-searchbar></ion-searchbar>
+      <ion-searchbar placeholder="Buscar en AutoPartes..."></ion-searchbar>
       </ion-toolbar>
     <ion-title>
     </ion-title>
@@ -42,10 +42,6 @@
       <button ion-button block (click)="buscarModeloMarca()">Buscar Auto.</button>
     </ion-item>
   </ion-list>
-
-
-  <ion-searchbar placeholder="Buscar en AutoPartes..."></ion-searchbar>
-
 
   <ion-card *ngFor="let art of articulos" (click)="itemTapped(art);">
     <ion-card-header>

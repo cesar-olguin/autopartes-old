@@ -28,7 +28,8 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
-
+    //this.Usuario = this.getFromStorageAsyncUser();
+    //this.Password = this.getFromStorageAsyncPass();
   }
 
   login() {
@@ -42,22 +43,22 @@ export class LoginPage {
           this.correoError();
         }
         else {
+          this.storage.set('user', this.Usuario);
+          this.storage.set('pass', this.Password);
 
-            this.nativeStorage.setItem('user', { property: this.Usuario }).then(
-              data => console.log(data.property),
-              error => console.error(error)
-            );
-            this.nativeStorage.setItem('pass', { property: this.Password }).then(
-              data => console.log(data.property),
-              error => console.error(error)
-            );
-            this.events.publish('user:loggedin');
-            this.appCtrl.getRootNav().setRoot(UserPage);
-          
-
+          this.events.publish('user:loggedin');
+          this.appCtrl.getRootNav().setRoot(UserPage);
         }
       });
     }
+  }
+
+  async getFromStorageAsyncUser() {
+    return await this.storage.get('user');
+  }
+
+  async getFromStorageAsyncPass() {
+    return await this.storage.get('pass');
   }
 
   sinDatos() {

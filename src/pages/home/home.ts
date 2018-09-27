@@ -11,15 +11,7 @@ import { LoadingController } from "ionic-angular";
 export class HomePage {
   selectedItem: any;
   pedidos: any[] = [];
-  modelos: any;
-  marcas: any[] = [];
-  selectModelo: any;
-  selectMarca: any;
-  public marcaId;
-  public modeloId;
-  public marcaName;
-  public modeloName;
-
+ 
   constructor(
     public navCtrl: NavController,
     public restService: UserServiceProvider,

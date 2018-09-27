@@ -1,9 +1,10 @@
-import { NativeStorage } from '@ionic-native/native-storage';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { UserServiceProvider } from '../../providers/user-service/user-service';
-import { ArticlePage } from '../article/article';
-import { AddArticlePage } from '../add-article/add-article';
+import { NativeStorage } from "@ionic-native/native-storage";
+import { Component } from "@angular/core";
+import { IonicPage, NavController, NavParams } from "ionic-angular";
+import { UserServiceProvider } from "../../providers/user-service/user-service";
+import { ArticlePage } from "../article/article";
+import { AddArticlePage } from "../add-article/add-article";
+import { Storage } from "@ionic/storage";
 
 /**
  * Generated class for the MyPostPage page.
@@ -14,8 +15,8 @@ import { AddArticlePage } from '../add-article/add-article';
 
 @IonicPage()
 @Component({
-  selector: 'page-my-post',
-  templateUrl: 'my-post.html',
+  selector: "page-my-post",
+  templateUrl: "my-post.html"
 })
 export class MyPostPage {
   selectedItem: any;
@@ -27,12 +28,17 @@ export class MyPostPage {
 
   Usuario;
 
-  constructor(public navCtrl: NavController, public restService: UserServiceProvider, public navParams: NavParams, private nativeStorage: NativeStorage) {
-  }
+  constructor(
+    public navCtrl: NavController,
+    public restService: UserServiceProvider,
+    public navParams: NavParams,
+    private nativeStorage: NativeStorage,
+    public storage: Storage
+  ) {}
+  
   ionViewDidLoad() {
-    this.nativeStorage.getItem('idUser').then((data) => {
-      this.Usuario = data.property;
-      console.log('Usuario: ', this.Usuario);
+    this.storage.get("idUser").then(val => {
+      this.Usuario = val;
       this.restService.getArticuloByUser(this.Usuario).then(data => {
         this.Articulos = data;
         console.log(JSON.stringify(data));
@@ -46,13 +52,7 @@ export class MyPostPage {
     });
   }
 
-
-  
-
   addArticle(/*marcaId,modeloId*/) {
-    this.navCtrl.push(AddArticlePage, {
-      
-    });
+    this.navCtrl.push(AddArticlePage, {});
   }
-
 }

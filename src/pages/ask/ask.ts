@@ -3,6 +3,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
+import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
@@ -20,7 +21,7 @@ export class AskPage {
   foto;
   IdUser;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera, private restService: UserServiceProvider, public nativeStorage: NativeStorage) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera, private restService: UserServiceProvider, public nativeStorage: NativeStorage, public storage: Storage) {
   }
 
   ionViewDidLoad() {
@@ -45,11 +46,9 @@ export class AskPage {
   }
 
   addAsk() {
-    this.nativeStorage.getItem('idUser').then((data) => {
-      this.IdUser = data.property;
-      console.log('Usuario: ', this.IdUser);
-
-      if(this.foto == null){
+    this.storage.get('idUser').then((val) => {
+      this.IdUser = val; 
+      if (this.foto == null) {
         this.foto = '../../assets/imgs/sin-foto.png'
       }
       let body = {
@@ -62,14 +61,13 @@ export class AskPage {
   
       console.log(JSON.stringify(body));
       this.restService.postPedido(body)
-           .then((result) => {
-               console.log(result);
-           }, (err) => {
-               console.log(err);
-           });
-     
+        .then((result) => {
+          console.log(result);
+        }, (err) => {
+          console.log(err);
+        });
+  
       this.navCtrl.pop();
-
     });
   }
 
