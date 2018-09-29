@@ -24,7 +24,7 @@ export class LoginPage {
   public Usuario;
   public Password;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public restService: UserServiceProvider, public alertCtrl: AlertController, private appCtrl: App, private storage: Storage, private nativeStorage: NativeStorage, public events: Events) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public restService: UserServiceProvider, public alertCtrl: AlertController, private appCtrl: App, private storage: Storage, private nativeStorage: NativeStorage, public events: Events, ) {
   }
 
   ionViewDidLoad() {
@@ -45,6 +45,9 @@ export class LoginPage {
         else {
           this.storage.set('user', this.Usuario);
           this.storage.set('pass', this.Password);
+
+          window.localStorage.setItem('user',this.Usuario);
+          window.localStorage.setItem('pass',this.Password);
 
           this.events.publish('user:loggedin');
           this.appCtrl.getRootNav().setRoot(UserPage);

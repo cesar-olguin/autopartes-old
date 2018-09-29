@@ -34,14 +34,13 @@ export class MyPostPage {
     public navParams: NavParams,
     private nativeStorage: NativeStorage,
     public storage: Storage
-  ) {}
-  
+  ) { }
+
   ionViewDidLoad() {
     this.storage.get("idUser").then(val => {
       this.Usuario = val;
       this.restService.getArticuloByUser(this.Usuario).then(data => {
         this.Articulos = data;
-        console.log(JSON.stringify(data));
       });
     });
   }

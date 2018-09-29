@@ -50,16 +50,13 @@ export class ArticlePage {
         console.log(JSON.stringify(body));
         this.restService.postComentario(body).then((result) => {
           console.log(result);
-          this.restService.getArticuloById(this.idArticulo).then(data => {
-            this.articuloId = data;
+          this.restService.getComentarios(this.idArticulo).then(data => {
+            this.comentarios.push(data);
           });
+          this.Comentario = " ";
         }, (err) => {
           console.log(err);
         });
-      
-      
-
-      
     });
   }
 
