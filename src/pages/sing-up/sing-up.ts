@@ -4,6 +4,7 @@ import { UserServiceProvider } from './../../providers/user-service/user-service
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, ViewController, App } from 'ionic-angular';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the SingUpPage page.
@@ -29,12 +30,11 @@ export class SingUpPage {
     Confirmar: string;
     Fecha_nac: string;
     Genero: string;
+    Usuario;
     //pushPage: any;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, public restService: UserServiceProvider, public alertCtrl: AlertController, public viewCtrl: ViewController,
         public appCtrl: App) {
-        //this.myForm = this.createMyForm();
-        //this.pushPage = HomePage;
     }
 
     ionViewDidLoad() {
@@ -46,56 +46,47 @@ export class SingUpPage {
         this.navCtrl.push(HomePage);
     }
 
-    public createMyForm() {
-        return this.formBuilder.group({
-            Nombre: [''],
-            ApellidoP: [''],
-            ApellidoM: [''],
-            Correo: [''],
-            Contrasena: [''],
-            Confirmar: [],
-            Fecha_alta: [this.date = new Date().toLocaleDateString('en-GB')],
-            Cell: [''],
-            Fecha_nac: [''],
-            Genero: ['H']
-        });
-    }
-
     addUser() {
-        if (this.Genero != 'H') {
-            this.Genero = 'M';
-        }
-        let body = {
-            Nombre: this.Nombre,
-            ApellidoP: this.ApellidoP,
-            ApellidoM: this.ApellidoM,
-            Correo: this.Correo,
-            Cell: this.Cell,
-            Contrasena: Md5.hashStr(this.Contrasena),
-            Confirmar: Md5.hashStr(this.Confirmar),
-            Fecha_nac: this.Fecha_nac = new Date().toLocaleDateString('en-GB'),
-            Genero: this.Genero,
-            Fecha_alta: this.date = new Date().toLocaleDateString('en-GB')
-        }
         if (this.Contrasena != this.Confirmar) {
             this.noCoinciden();
         }
-        else if (this.Nombre == '' || this.ApellidoP == '' || this.ApellidoM == '' || this.Correo == '' || this.Cell == '' || this.Fecha_nac == '') {
+        else if (this.Nombre == null || this.ApellidoP == null || this.ApellidoM == null || this.Correo == null || this.Cell == null || this.Fecha_nac == null) {
             this.camposVacios();
         }
         else {
-            console.log(JSON.stringify(body));
-            this.restService.postRegistro(body)
-                .then((result) => {
-                    console.log(result);
-                }, (err) => {
-                    console.log(err);
-                });
-            this.userAdded();
-            this.navCtrl.pop();
-            this.navCtrl.push(HomePage);
+            if (this.Genero != 'H') {
+                this.Genero = 'M';
+            }
+            let body = {
+                Nombre: this.Nombre,
+                ApellidoP: this.ApellidoP,
+                ApellidoM: this.ApellidoM,
+                Correo: this.Correo,
+                Cell: this.Cell,
+                Contrasena: Md5.hashStr(this.Contrasena),
+                Confirmar: Md5.hashStr(this.Confirmar),
+                Fecha_nac: this.Fecha_nac = new Date().toLocaleDateString('en-GB'),
+                Genero: this.Genero,
+                Fecha_alta: this.date = new Date().toLocaleDateString('en-GB')
+            }
+            this.restService.checkEmail(this.Correo).then(data => {
+                this.Usuario = JSON.stringify(data);
+                if (this.Usuario == "[]") {
+                    console.log(JSON.stringify(body));
+                    this.restService.postRegistro(body)
+                        .then((result) => {
+                            console.log(result);
+                        }, (err) => {
+                            console.log(err);
+                        });
+                    this.userAdded();
+                    this.navCtrl.push(LoginPage);
+                }
+                else {
+                    this.userCheck();
+                }
+            });
         }
-
     }
 
     noCoinciden() {
@@ -120,6 +111,15 @@ export class SingUpPage {
         let alert = this.alertCtrl.create({
             title: 'BIEN',
             subTitle: 'Tu usuario fue registrado.',
+            buttons: ['Aceptar'],
+        });
+        alert.present();
+    }
+
+    userCheck() {
+        let alert = this.alertCtrl.create({
+            title: 'ERROR',
+            subTitle: 'El usuario ya existe.',
             buttons: ['Aceptar'],
         });
         alert.present();
