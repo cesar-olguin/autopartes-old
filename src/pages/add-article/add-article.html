@@ -8,34 +8,34 @@
 </ion-header>
 
 <ion-content padding>
-  <form [formGroup]="myForm">
-    <ion-list>
-      <ion-item-divider>
-        Adjuntar Foto
-      </ion-item-divider>
-      <ion-item>
-        <button ion-button block (click)="getPicture()">Toma una foto</button>
-      </ion-item>
-      <ion-item>
-        <img formControlName="Foto_Principal" [src]="image" *ngIf="image" />
-      </ion-item>
 
-      <ion-item>
-        <ion-label color="primary" autocomplete="on" autocorrect="on" stacked>Titulo</ion-label>
-        <ion-input formControlName="Titulo" type="text"></ion-input>
-      </ion-item>
+  <ion-list>
+    <ion-item>
+      <ion-label color="primary" autocomplete="on" autocorrect="on" stacked>Titulo</ion-label>
+      <ion-input [(ngModel)]="Titulo" type="text"></ion-input>
+    </ion-item>
 
-      <ion-item>
-        <ion-label color="primary" autocomplete="on" autocorrect="on" stacked>Descripcion</ion-label>
-        <ion-textarea formControlName="Descripcion"></ion-textarea>
-      </ion-item>
+    <ion-item>
+      <ion-label color="primary" autocomplete="on" autocorrect="on" stacked>Descripcion</ion-label>
+      <ion-textarea [(ngModel)]="Descripcion"></ion-textarea>
+    </ion-item>
 
-      <ion-item>
-        <ion-label color="primary" stacked>Precio</ion-label>
-        <ion-input type="number" formControlName="Precio"></ion-input>
-      </ion-item>
-    </ion-list>
-  </form>
+    <ion-item>
+      <ion-label color="primary" stacked>Precio</ion-label>
+      <ion-input type="number" [(ngModel)]="Precio"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-item-divider>
+    Adjuntar Foto
+  </ion-item-divider>
+  <ion-item>
+    <button ion-button block (click)="getPicture()">Toma una foto</button>
+  </ion-item>
+  <ion-item>
+    <img [(ngModel)]="Foto_Principal" [src]="image" *ngIf="image" />
+  </ion-item>
+  <ion-item-divider>
+  </ion-item-divider>
   <button ion-button block (click)="addArticle()">Agregar Articulo</button>
   <!--ion-list>
     <ion-item>

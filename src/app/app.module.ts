@@ -1,3 +1,5 @@
+import { MyPostPage } from './../pages/my-post/my-post';
+import { AskPage } from './../pages/ask/ask';
 import { Camera } from '@ionic-native/camera';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -22,6 +24,10 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthProvider } from '../providers/auth/auth';
+import { AuthServiceProvider } from '../providers/auth-service/auth-service';
+import { IonicStorageModule } from '@ionic/storage';
+import { NativeStorage  } from '@ionic-native/native-storage';
 
 @NgModule({
   declarations: [
@@ -38,12 +44,20 @@ import { HttpClientModule } from '@angular/common/http';
     UserPage,
     CameraPage,
     SingUpPage,
-    AccountPage
+    AccountPage,
+    AskPage,
+    MyPostPage
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+      monthShortNames: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'],
+      dayNames: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
+      dayShortNames: ['dom', 'lun', 'mar', 'mie', 'jue', 'vie', 'sab'],
+    }),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -60,7 +74,9 @@ import { HttpClientModule } from '@angular/common/http';
     UserPage,
     CameraPage,
     SingUpPage,
-    AccountPage
+    AccountPage,
+    AskPage,
+    MyPostPage
 
   ],
   providers: [
@@ -68,7 +84,10 @@ import { HttpClientModule } from '@angular/common/http';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserServiceProvider,
-    Camera
+    Camera,
+    AuthProvider,
+    AuthServiceProvider,
+    NativeStorage 
   ]
 })
 export class AppModule {}

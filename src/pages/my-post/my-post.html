@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-toolbar color="primary">
+        <ion-searchbar></ion-searchbar>
+      </ion-toolbar>
+    <ion-title>
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addArticle();">
+        <!--button ion-button icon-only (click)="openModal()"></button-->
+        <ion-icon name="add-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <img src="../../assets/imgs/slide1.jpg">
+
+  <ion-card *ngFor="let art of Articulos" (click)="itemTapped(art);">
+    <ion-card-header>
+      <img [src]="art.Foto_Principal" />
+    </ion-card-header>
+    <ion-card-content>
+      <h1>${{ art.Precio }}</h1>
+      <p>{{ art.Titulo }}</p>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

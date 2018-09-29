@@ -11,18 +11,43 @@
 
   <img src="../../assets/imgs/slide1.jpg">
 
-  <ion-list inset>
-      <ion-item>
-          <button ion-button block>Pedir AutoParte</button>
-        </ion-item>
+  <!-- <ion-list inset no-lines>
     <ion-item>
-        <button ion-item *ngFor="let art of articulos">
-            Busco -> {{ art.Titulo }}
-            <ion-badge color="secondary">500</ion-badge>
-          </button> 
-       
+      <button ion-button block (click)="pushPage();">Pedir AutoParte</button>
     </ion-item>
-    
+    <button ion-item *ngFor="let ped of pedidos">
+      Busco -> {{ ped.Titulo }}
+      <ion-badge color="secondary">{{ ped.idPedido }}</ion-badge>
+    </button>
+  </ion-list> -->
+
+  <!-- <ion-list no-lines>
+    <ion-item>
+      <button ion-button block (click)="pushPage();">Pedir AutoParte</button>
+    </ion-item>
+    <ion-item [virtualScroll]="items" approxItemHeight="40px">
+      <button ion-item *virtualItem="let item">
+        Busco -> {{ item.Titulo }}
+        <ion-badge color="secondary">{{ item.idPedido }}</ion-badge>
+      </button>
+    </ion-item>
+  </ion-list> -->
+  <button ion-button block (click)="pushPage();">Pedir AutoParte</button>
+  <ion-list no-lines [virtualScroll]="items" approxItemHeight="40px">
+    <button ion-item *virtualItem="let item">
+      Busco -> {{ item.Titulo }}
+      <ion-badge color="secondary">{{ item.idPedido }}</ion-badge>
+    </button>
   </ion-list>
+
+  <!-- <ion-list [virtualScroll]="displayedImages | async">
+    <ion-item *virtualItem="let displayedImage">
   
+        <ion-avatar item-left>
+          <img src="{{displayedImage}}">
+        </ion-avatar>
+  
+      </ion-item>
+    </ion-list> -->
+
 </ion-content>

@@ -1,81 +1,76 @@
-import { ArticlePage } from './../article/article';
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { UserServiceProvider } from './../../providers/user-service/user-service';
-import { LoadingController } from 'ionic-angular';
-import { CarcoincidencePage } from '../carcoincidence/carcoincidence';
+import { AskPage } from "./../ask/ask";
+import { Component } from "@angular/core";
+import { NavController, NavParams, Events } from "ionic-angular";
+import { UserServiceProvider } from "./../../providers/user-service/user-service";
+import { LoadingController } from "ionic-angular";
+import { Observable } from 'rxjs';
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: "page-home",
+  templateUrl: "home.html"
 })
 export class HomePage {
-
   selectedItem: any;
-  articulos: any[] = [];
-  modelos: any;
-  marcas: any[] = [];
-  selectModelo: any;
-  selectMarca: any;
-  public marcaId;
-  public modeloId;
-  public marcaName;
-  public modeloName;
+  pedidos;
+  items;
+  displayedImages;
 
-  constructor(public navCtrl: NavController, public restService: UserServiceProvider, public navParams: NavParams, public loadingCtrl: LoadingController) {
-    //this.selectedItem = navParams.get('art');
-    //this.selectModelo = navParams.get('mod');
-    //this.selectMarca = navParams.get('mar');
-    //this.presentLoading();
-  }
+  constructor(
+    public navCtrl: NavController,
+    public restService: UserServiceProvider,
+    public navParams: NavParams,
+    public loadingCtrl: LoadingController,
+    public events: Events
+  ) { }
 
   ionViewDidLoad() {
-    this.restService.getArticulos()
-      .subscribe(
-        (data) => { // Success
-          this.articulos = data['records'];
-        },
-        (error) => {
-          console.error(error);
-        }
-      )
 
-    this.restService.getMarcas()
-      .subscribe(
-        (data) => {
-          this.marcas = data['records'];
-        },
-        (error) => {
-          console.log(error);
-        }
-      )
+    if (window.localStorage.getItem("user") != null && window.localStorage.getItem("pass") != null) {
+      //Hay una sesión iniciada
+      //Dirige a la pantalla principal ya logueada.
+      this.events.publish('user:loggedin');
+    } else {
+      //Manda la pantalla de inicio de sesión o autentificación
+      this.events.publish('user:loggedout');
+    }
+    this.load();
   }
 
-  itemTapped(artId) {
-    this.navCtrl.push(ArticlePage, {
-      art: artId.idArticulo
-    });
+  ionViewCanEnter() {
+    console.log("ionViewCanEnter");
+    window.location.reload;
+    this.load();
   }
 
-  marcaTapped(idMarca,Marca) {
-    this.marcaId = idMarca;
-    this.marcaName = Marca;
-    this.restService.getModelo(idMarca).then(data => {
-      this.modelos = data
-    });
+  ionViewWillEnter() {
+    console.log("ionViewWillEnter");
+    window.location.reload;
+    this.load();
   }
 
-  modeloTapped(idMarca,Modelo) {
-   this.modeloId = idMarca;
-   this.modeloName = Modelo;
+  pushPage() {
+    this.navCtrl.push(AskPage);
   }
 
-  buscarModeloMarca(/*marcaId,modeloId*/) {
-    this.navCtrl.push(CarcoincidencePage, {
-      marId: this.marcaId,
-      marName: this.marcaName,
-      modId: this.modeloId,
-      modName: this.modeloName
-    });
+  load() {
+    this.restService.getPedidos().subscribe(
+      data => {
+        // Success
+        this.pedidos = data;
+        //this.items = data;
+        // console.log(data);
+        this.items = data;
+      },
+      error => {
+        console.error(error);
+      }
+    );
+  }
+
+  ngOnInit() {
+    const baseImg = "http://lorempixel.com/400/200/";
+    const imgArray = Array(50).fill(baseImg);
+
+    this.displayedImages = Observable.of(imgArray);
   }
 
 }

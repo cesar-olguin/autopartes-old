@@ -1,9 +1,11 @@
+import { NativeStorage } from '@ionic-native/native-storage';
+import { ArticlePage } from './../article/article';
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, App } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 //import { Http, Headers, RequestOptions } from '@angular/common/http';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserServiceProvider } from './../../providers/user-service/user-service';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the AddArticlePage page.
@@ -19,16 +21,20 @@ import { UserServiceProvider } from './../../providers/user-service/user-service
 export class AddArticlePage {
 
   image: string = null;
-  myForm: FormGroup;
   date: string;
-  myFoto: FormGroup;
-  public foto;
-  
-  constructor(public navCtrl: NavController, public restService: UserServiceProvider, public navParams: NavParams, private camera: Camera, public formBuilder: FormBuilder) {
-    this.myForm = this.createMyForm();
+  Titulo: string;
+  Descripcion: string;
+  Precio: string;
+  Fecha_alta: string;
+  Foto_Principal: string;
+  foto;
+  Usuario;
+
+  constructor(public navCtrl: NavController, public restService: UserServiceProvider, public navParams: NavParams, private camera: Camera, private appCtrl: App, private nativeStorage: NativeStorage, private storage: Storage) {
   }
 
   ionViewDidLoad() {
+
   }
 
   getPicture() {
@@ -42,38 +48,43 @@ export class AddArticlePage {
       .then(imageData => {
         this.image = `data:image/jpeg;base64,${imageData}`;
         this.foto = this.image;
-        this.myForm = this.createMyForm();
       })
       .catch(error => {
         console.error(error);
       });
   }
 
-  public createMyForm() {
-    if(this.foto == null){
-      this.foto = '../../assets/imgs/sin-foto.png'
-    }
-    return this.formBuilder.group({
-      Titulo: ['', Validators.required],
-      Descripcion: ['', Validators.required],
-      Precio: ['', Validators.required],
-      idUsuario: ['1'],
-      Cantidad: ['1'],
-      Ubicacion: ['Manzanillo,Colima,Mexico'],
-      Fecha_alta:[this.date = new Date().toLocaleDateString('en-GB')],
-      Fecha_modificacion:[''],
-      Foto_Principal:[this.foto, Validators.required]
-    });
-  }
-
   addArticle() {
-    console.log(JSON.stringify(this.myForm.value));
-    console.log(this.foto);
-    this.restService.postArticulo(this.myForm.value).then((result) => {
-      console.log(result);
-    }, (err) => {
-      console.log(err);
+    this.storage.get('idUser').then((val) => {
+      this.Usuario = val;
+      if (this.foto == null) {
+        this.foto = '../../assets/imgs/sin-foto.png'
+      }
+  
+      let body = {
+        Titulo: this.Titulo,
+        Descripcion: this.Descripcion,
+        Precio: this.Precio,
+        idUsuario: this.Usuario,
+        Cantidad: "1",
+        Ubicacion: "Manzanillo,Colima,Mexico",
+        Fecha_alta: this.date = new Date().toLocaleDateString('en-GB'),
+        //Fecha_modificacion: ,
+        Foto_Principal: this.foto,
+      }
+  
+      console.log(JSON.stringify(body));
+      console.log(this.foto);
+      this.restService.postArticulo(body).then((result) => {
+        console.log(result);
+      }, (err) => {
+        console.log(err);
+      });
+  
+      this.navCtrl.pop();
     });
+
+    
   }
 
 }

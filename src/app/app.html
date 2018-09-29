@@ -2,35 +2,35 @@
   <ion-header>
     <ion-toolbar color="">
       <!--ion-title-->
-        <!--ion-icon name="logo-facebook">       
+      <!--ion-icon name="logo-facebook">       
         </ion-icon-->
-        
-        <button menuClose ion-button full large (click)="nav.setRoot(pages2.accountPage)">
-            <ion-icon name="person"></ion-icon>
-            ¡Bienvenido!
-          </button>
+
+      <button menuClose ion-button full large>
+        <ion-icon item-start name="person"></ion-icon>
+        ¡Bienvenido!
+      </button>
       <!--/ion-title-->
     </ion-toolbar>
   </ion-header>
 
   <ion-content>
     <ion-list>
-      <button menuClose ion-item icon-left (click)="nav.setRoot(pages2.singUpPage)">
-        <ion-icon name="person"></ion-icon>
-        Login
+      <button ion-item detail-none block menuClose *ngFor="let p of pages" (click)="openPage(p)">
+        <ion-icon item-start [name]="p.icon"></ion-icon>
+        {{p.title}}
       </button>
-      <button menuClose ion-item icon-left (click)="nav.setRoot(pages2.userPage)">
-          <ion-icon name="person"></ion-icon>
-          Info Usuario
-        </button>
-      <button menuClose ion-item icon-left (click)="nav.setRoot(pages2.homePage)">
-        <ion-icon name="home"></ion-icon>
+      <!--button menuClose ion-item icon-left (click)="nav.setRoot(menuLogin.userPage)">
+        <ion-icon item-start name="person"></ion-icon>
+        Info Usuario
+      </button>
+      <button menuClose ion-item icon-left (click)="nav.setRoot(menuLogin.homePage)">
+        <ion-icon item-start name="home"></ion-icon>
         Inicio
       </button>
-      <button menuClose ion-item icon-left (click)="nav.setRoot(pages2.vendorsPage)">
-        <ion-icon name="home"></ion-icon>
+      <button-- menuClose ion-item icon-left (click)="nav.setRoot(menuLogin.vendorsPage)">
+        <ion-icon item-start name="home"></ion-icon>
         Vendedores
-      </button>
+      </button-->
     </ion-list>
   </ion-content>
 
