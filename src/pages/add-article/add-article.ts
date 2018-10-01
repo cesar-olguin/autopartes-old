@@ -69,7 +69,7 @@ export class AddArticlePage {
         Cantidad: "1",
         Ubicacion: "Manzanillo,Colima,Mexico",
         Fecha_alta: this.date = new Date().toLocaleDateString('en-GB'),
-        //Fecha_modificacion: ,
+        Fecha_modificacion: this.date = new Date().toLocaleDateString('en-GB'),
         Foto_Principal: this.foto,
       }
   

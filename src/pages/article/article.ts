@@ -31,6 +31,7 @@ export class ArticlePage {
         console.log("Datos Artiulo");
         console.log(this.articuloId);
       });*/
+      this.loadChat();
   }
 
   postChat() {
@@ -46,14 +47,13 @@ export class ArticlePage {
           idUsuario: this.IdUser,
           Comentario: this.Comentario,
         }
+
         console.log('Usuario: ', this.IdUser);
         console.log(JSON.stringify(body));
         this.restService.postComentario(body).then((result) => {
           console.log(result);
-          this.restService.getComentarios(this.idArticulo).then(data => {
-            this.comentarios.push(data);
-          });
-          this.Comentario = " ";
+          this.ionViewDidLoad();
+          window.location.reload;
         }, (err) => {
           console.log(err);
         });

@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar color="dark">
+  <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -33,15 +33,24 @@
     </ion-grid>
     <h5>DESCRIPCION</h5>
     <p>{{ artId.Descripcion }}</p>
-    <ion-list>
-      <h5>Comentarios</h5>
-      <ion-item *ngFor="let coment of comentarios">
 
+
+    <h5>Comentarios</h5>
+    <ion-list> 
+      <ion-item *ngFor="let coment of comentarios">
         <h2>{{coment.Titulo}}</h2>
         <p>{{coment.Comentario}}</p>
-
       </ion-item>
     </ion-list>
+
+    <!-- <h5>Comentarios</h5>
+    <ion-list no-lines [virtualScroll]="comentarios" approxItemHeight="40px">
+      <ion-item *virtualItem="let coment">
+        <h2>{{coment.Titulo}}</h2>
+        <p>{{coment.Comentario}}</p>
+      </ion-item>
+    </ion-list> -->
+
   </ion-content>
 </ion-content>
 
