@@ -1,11 +1,11 @@
 <ion-header>
-  <ion-navbar color="dark">
+  <ion-navbar>
     <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-toolbar color="primary">
+    <ion-toolbar>
       <ion-searchbar placeholder="Buscar en AutoPartes..."></ion-searchbar>
-      </ion-toolbar>
+    </ion-toolbar>
     <ion-title>
     </ion-title>
     <ion-buttons end>
@@ -26,7 +26,6 @@
     <ion-item>
       <ion-label>Marca del Auto</ion-label>
       <ion-select ngModel="marcas" interface="action-sheet">
-        <!--The interface the select should use: action-sheet, popover or alert. Default: alert.-->
         <ion-option *ngFor="let mar of marcas" (ionSelect)="marcaTapped(mar.idMarca,mar.Marca);" [value]="mar.idMarca">{{
           mar.Marca }}</ion-option>
       </ion-select>
@@ -43,14 +42,35 @@
     </ion-item>
   </ion-list>
 
-  <ion-card *ngFor="let art of articulos" (click)="itemTapped(art);">
-    <ion-card-header>
-      <img [src]="art.Foto_Principal" />
-    </ion-card-header>
-    <ion-card-content>
-      <h1>${{ art.Precio }}</h1>
-      <p>{{ art.Titulo }}</p>
-    </ion-card-content>
-  </ion-card>
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let art of articulos"col-6-xs no-padding>
+        <ion-card (click)="itemTapped(art);">
+          <ion-card-header>
+            <img [src]="art.Foto_Principal">
+          </ion-card-header>
+          <ion-card-content>
+            <h1>${{ art.Precio }}</h1>
+            <p>{{ art.Titulo }}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
+  <!-- <ion-grid>
+  <ion-row>
+    <ion-col [virtualScroll]="articulos" approxItemHeight="200px" col-6-xs no-padding>
+      <ion-card *virtualItem="let art" (click)="itemTapped(art);">
+        <ion-card-header>
+          <img [src]="art.Foto_Principal" />
+        </ion-card-header>
+        <ion-card-content>
+          <h1>${{ art.Precio }}</h1>
+          <p>{{ art.Titulo }}</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid> -->
 </ion-content>

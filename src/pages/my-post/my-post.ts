@@ -20,12 +20,7 @@ import { Storage } from "@ionic/storage";
 })
 export class MyPostPage {
   selectedItem: any;
-  Articulos: any;
-  modelos: any;
-  marcas: any[] = [];
-  selectModelo: any;
-  selectMarca: any;
-
+  articulos: any;
   Usuario;
 
   constructor(
@@ -34,13 +29,32 @@ export class MyPostPage {
     public navParams: NavParams,
     private nativeStorage: NativeStorage,
     public storage: Storage
-  ) { }
+  ) {
+    window.location.reload;
+    this.load();
+   }
 
   ionViewDidLoad() {
+    window.location.reload;
+    this.load();
+  }
+
+
+  ionViewCanEnter() {
+    window.location.reload;
+    this.load();
+  }
+
+  ionViewWillEnter() {
+    window.location.reload;
+    this.load();
+  }
+
+  load(){
     this.storage.get("idUser").then(val => {
       this.Usuario = val;
       this.restService.getArticuloByUser(this.Usuario).then(data => {
-        this.Articulos = data;
+        this.articulos = data;
       });
     });
   }

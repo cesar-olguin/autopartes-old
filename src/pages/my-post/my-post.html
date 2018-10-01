@@ -1,11 +1,11 @@
 <ion-header>
-  <ion-navbar color="dark">
+  <ion-navbar>
     <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-toolbar color="primary">
-        <ion-searchbar></ion-searchbar>
-      </ion-toolbar>
+    <ion-toolbar>
+      <ion-searchbar placeholder="Buscar en mis Posts..."></ion-searchbar>
+    </ion-toolbar>
     <ion-title>
     </ion-title>
     <ion-buttons end>
@@ -22,14 +22,36 @@
 
   <img src="../../assets/imgs/slide1.jpg">
 
-  <ion-card *ngFor="let art of Articulos" (click)="itemTapped(art);">
-    <ion-card-header>
-      <img [src]="art.Foto_Principal" />
-    </ion-card-header>
-    <ion-card-content>
-      <h1>${{ art.Precio }}</h1>
-      <p>{{ art.Titulo }}</p>
-    </ion-card-content>
-  </ion-card>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col [virtualScroll]="articulos" approxItemHeight="140px" col-6-xs stretch>
+        <ion-list *virtualItem="let art">
+          <ion-card (click)="itemTapped(art);">
+            <ion-card-header>
+              <ion-img  [src]="art.Foto_Principal" width="80px" height="80px"></ion-img>
+            </ion-card-header>
+            <ion-card-content>
+              <h1>${{ art.Precio }}</h1>
+              <p>{{ art.Titulo }}</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <!-- <ion-list [virtualScroll]="articulos" approxItemHeight="40px">
+    <ion-card *virtualItem="let art" (click)="itemTapped(art);">
+      <ion-card-header>
+        <img [src]="art.Foto_Principal" />
+      </ion-card-header>
+      <ion-card-content>
+        <h1>${{ art.Precio }}</h1>
+        <p>{{ art.Titulo }}</p>
+      </ion-card-content>
+    </ion-card>
+  </ion-list> -->
 
 </ion-content>
